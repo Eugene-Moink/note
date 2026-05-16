@@ -1,0 +1,5206 @@
+#include<bits/stdc++.h>
+#define endl "\n"
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int n, k;
+    cin >> n >> k;
+
+    int cnt = 0;
+    while (n!=0)
+    {
+        if(n%k==0)
+        {
+            n /= k;
+            cnt++;
+        }
+        else
+        {
+            n -= 1;
+            cnt++;
+        }
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    int A, B, H1, H2, H, n;
+    cin >> A >> B >> H1 >> H2 >> H >> n;
+
+    bool open = 0;
+    int result = H;
+
+    while(n--)
+    {
+        result -= A;
+
+        int rain;
+        cin >> rain;
+        result += rain;
+
+        if(open) 
+        {
+            result -= B;
+        }
+        
+        if(result >= H1) open = 1;     
+        else if(result <= H2) open = 0;     
+        
+        result = max(result, 0);
+    }
+    
+    cout << result << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        int cnt = 0;
+        string str;
+        cin >> str;
+        char temp = str[0];
+        for (int i = 0; i < str.size();i++)
+        {
+            if(str[i]==temp)
+            {
+                cnt++;
+            }
+        }
+        if(cnt==str.size())
+        {
+            cout << "NO" << endl;
+        }
+
+        else 
+        {
+            cout << "YES" << endl;
+            string r = str;
+            for(int i = 0; i < r.size(); i++) 
+            {
+                for(int j = i + 1; j < r.size(); j++) 
+                {
+                    if(r[i] != r[j]) 
+                    {
+                        swap(r[i], r[j]);
+                        break;
+                    }
+                }
+                if(r != str) break;
+            }
+            cout << r << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        int a, b;
+        cin >> a >> b;
+        cout << min(a, b) << " " << max(a, b) << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        string str1, str2;
+        cin >> str1 >> str2;
+        for (int i = 0; i < str1.size();i++)
+        {
+            if(i==0)
+            {
+                cout << str2[i];
+            }
+
+            else{
+                cout << str1[i];
+            }
+        }
+
+        cout << " ";
+
+         for (int i = 0; i < str2.size();i++)
+        {
+            if(i==0)
+            {
+                cout << str1[i];
+            }
+
+            else{
+                cout << str2[i];
+            }
+        }
+
+        cout << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        int number, s_time, min_for_day;
+        cin >> number >> s_time >> min_for_day;
+        int last_end = 0;
+        bool can_showering = 0;
+        // vector<int> time(min_for_day + 1, 0);
+
+        while(number--)
+        {
+            int l, r;
+            cin >> l >> r;
+
+            int gap = l - last_end;
+
+            if(gap>=s_time)
+            {
+                can_showering = 1;
+                break;
+            }
+            // for (int i = l; i <= r;i++)
+            // {
+            //     time[i] = 1;
+            // }
+            last_end = r;
+        }
+        if(!can_showering && (min_for_day - last_end) >= s_time)
+            {
+                can_showering = 1;
+            }
+        if(can_showering) 
+            {
+                cout << "Yes" << endl;
+            } 
+        else 
+            {
+                cout << "No" << endl;
+            }
+    }
+
+    //     int max_time = 0;
+    //     int result = 0;
+    //     for (int i = 1; i <= min_for_day;i++)
+    //     {
+    //         if(time[i]!=1)
+    //         {
+    //             max_time++;
+    //         }
+            
+    //         if(time[i]==1)
+    //         {
+    //             result = max(result, max_time);
+    //             max_time=0;
+    //         }
+    //     }
+
+    //     result = max(result, max_time);
+
+    //     if(result>=s_time)
+    //     {
+    //         cout << "Yes" << endl;
+    //     }
+    //     else{
+    //         cout << "No" << endl;
+    //     }
+    // }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        int a1, a2, b1, b2;
+        cin >> a1 >> a2 >> b1 >> b2;
+
+        int wins = 0;
+        
+        // 情况1: Sunee(a1,a2) vs Slavic(b1,b2)
+        int s1 = (a1 > b1) + (a2 > b2);
+        int sl1 = (b1 > a1) + (b2 > a2);
+        if (s1 > sl1) wins++;
+        
+        // 情况2: Sunee(a1,a2) vs Slavic(b2,b1)
+        int s2 = (a1 > b2) + (a2 > b1);
+        int sl2 = (b2 > a1) + (b1 > a2);
+        if (s2 > sl2) wins++;
+        
+        // 情况3: Sunee(a2,a1) vs Slavic(b1,b2)
+        int s3 = (a2 > b1) + (a1 > b2);
+        int sl3 = (b1 > a2) + (b2 > a1);
+        if (s3 > sl3) wins++;
+        
+        // 情况4: Sunee(a2,a1) vs Slavic(b2,b1)
+        int s4 = (a2 > b2) + (a1 > b1);
+        int sl4 = (b2 > a2) + (b1 > a1);
+        if (s4 > sl4) wins++;
+        
+        cout << wins << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int T;
+    cin >> T;
+    while(T--)
+    {
+        string number;
+        cin >> number;
+        int result = 0;
+        for (int i = 0; i < number.size();i++)
+        {
+            result += number[i] - '0';
+        }
+        cout << result << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int T;
+    cin >> T;
+    while (T--)
+    {
+        int number;
+        cin >> number;
+        vector<int> temp;
+        for (int i = 1; i <= number;i++)
+        {
+            string tap;
+            cin >> tap;
+            for (int i = 0; i < tap.size();i++)
+            {
+                if(tap[i]=='#')
+                {
+                    int temp_tap = i + 1;
+                    temp.push_back(temp_tap);
+                }
+            }
+        }
+
+        reverse(temp.begin(), temp.end());
+        for (int i = 0; i < temp.size();i++)
+        {
+            cout << temp[i];
+            if(i<temp.size()-1)
+            {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int T;
+    cin >> T;
+    while(T--)
+    {
+        int a, b;
+        cin >> a >> b;
+        cout << b - a << endl;
+    }
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int n;
+    cin >> n;
+    int good_number;
+    cin >> good_number;
+    vector<string> str(n);
+
+    for (int i = 0; i < n;i++)
+    {
+        cin >> str[i];
+    }
+
+    int pair_number = 0;
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = i + 1; j < n && j <= i + good_number; j++)
+        {
+            if (str[i].length() == str[j].length()) 
+            {
+                pair_number++;
+            }
+        }
+    }
+
+    cout << pair_number << endl;
+    return 0;
+}
+int main()
+{
+    long long number;
+    cin >> number;
+    vector<pair<long long, long long>> result;
+
+    for (long long k = 2; k <= sqrt(number * 2);k++)
+    {
+        long long numerator = (2 * number) / k - k + 1;
+        if(numerator > 0 && numerator % 2 == 0)
+        {
+            if ((2 * number) % k != 0) continue;
+            long long a = numerator / 2;
+            if (a >= 1)
+            {
+                long long start = a;
+                long long end = a + k - 1;
+                result.push_back({start, end});
+            }
+        }
+    }
+
+    sort(result.begin(), result.end());
+
+    for (auto& p : result)
+    {
+        cout << p.first << " " << p.second << endl;
+    }
+    return 0;
+}
+int main()
+{
+    long long n;
+    cin >> n;
+
+    long long result_aera = 0;
+
+    long long result[101][101] = {0};
+    while(n--)
+    {
+        int x1, y1, x2, y2;
+        cin >> x1 >> y1 >> x2 >> y2;
+        for (int i = x1; i < x2;i++)
+        {
+            for (int j = y1; j < y2;j++)
+            {
+                if (!result[i][j])
+                 {
+                    result[i][j] = true;
+                    result_aera++;
+                 }
+            }
+        }
+
+    }
+
+    cout << result_aera << endl;
+    return 0;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    vector<int> score_people(m + 1,0);
+    vector<int> prefix_people(m + 1,0);
+
+    for (int i = 1; i <= m;i++)
+    {
+        cin >> score_people[i];
+        prefix_people[i] = prefix_people[i - 1] + score_people[i];
+    }
+
+    int x, y;
+    cin >> x >> y;
+
+    long long total = prefix_people[m];
+
+    int ans = 0;
+    for (int k = 1; k <= m; k++) {
+        long long n1 = total - prefix_people[k - 1];
+        long long n2 = prefix_people[k - 1];
+
+        if (x <= n1 && n1 <= y && x <= n2 && n2 <= y) {
+            ans = k;
+            break; 
+        }
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> id(n + 1,0);
+    vector<int> prefix(n + 1, 0);
+    for (int i = 1; i <= n;i++)
+    {
+        cin >> id[i];
+        prefix[i] = prefix[i - 1] + id[i];
+    }
+
+    vector<int> first_occurren(7, -1);
+    first_occurren[0] = 0;
+    int max_length = 0;
+
+    for (int i = 1; i <= n;i++)
+    {
+        int r = prefix[i] % 7;
+
+        if(first_occurren[r]==-1)
+        {
+            first_occurren[r] = i;
+        }
+
+        else
+        {
+            int current_length = i - first_occurren[r];
+            max_length = max(max_length, current_length);
+        }
+    }
+
+    cout << max_length << endl;
+    return 0;
+}
+bool canReachone(int x)
+{
+    set<int> visited;
+    int current = x;
+
+    while(current != 1) 
+    {
+        if(visited.count(current))
+        {
+            return false;
+        }
+
+        visited.insert(current);
+
+        if(current%2==1)
+        {
+            current = 5 * current - 1;
+        }
+        else
+            {
+                current = current / 2;
+            }
+        
+    }
+
+
+    return true;
+}
+
+int main()
+{
+    vector<int> result;
+    for (int i = 1; i <= 100;i++)
+    {
+       if(canReachone(i))
+       {
+           result.push_back(i);
+       }
+    }
+
+    for(int num:result)
+    {
+        cout << num << " ";
+    }
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++) 
+    {
+        cin >> a[i];
+    }
+
+    vector<int> right_min(n);
+    right_min[n - 1] = a[n - 1];
+
+    for(int i = n-2; i >= 0; i--) 
+    {
+        right_min[i] = min(a[i], right_min[i+1]);
+    }
+
+    double result = 10.0;
+
+    for (int i = 0; i < n - 1;i++)
+    {
+        double current_result = 10.0 * a[i] / right_min[i+1];
+        result = max(result, current_result);
+    }
+
+    cout << fixed << setprecision(2) << result << endl;
+}
+int main(){
+    int x, y;
+    cin >> x >> y;
+
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        if(x>=y){
+            int temp = x / 2;
+            x = x - temp;
+            y = y + temp;
+        }
+        else if(y>x){
+            int temp = y / 2;
+            x = x + temp;
+            y = y - temp;
+        }
+    }
+
+    cout << x <<" "<< y;
+    return 0;
+}
+int main(){
+    int T;
+    cin >> T;
+    while(T--){
+        string s;
+        cin >> s;
+        reverse(s.begin(), s.end());
+        for (int i = 0; i < s.size();i++){
+            if(s[i]=='p')
+            {
+                s[i] = 'q';
+            }
+
+            else if(s[i]=='q')
+            {
+                s[i] = 'p';
+            }
+        }
+        cout << s << endl;
+    }
+    return 0;
+}
+int main(){
+    int T;
+    cin >> T;
+    while(T--)
+    {
+        string s;
+        cin >> s;
+        string boot = s.substr(0, s.length() - 2);
+        string new_word = boot + 'i';
+        cout << new_word << endl;
+    }
+    return 0;
+}
+const int MOD = 998244353;
+
+int main(){
+    string s;
+    cin >> s;
+
+    long long total = 0;
+    int n = s.length();
+
+    for (int i = 0; i < n;){
+        int start = i;
+        while(i<n&&(i==start||s[i]!=s[i-1])){
+            i++;
+        }
+        int len = i - start;
+        long long count = (1LL * len * (len + 1) / 2) % MOD;
+        total = (total + count) % MOD;
+    }
+
+    cout << total << endl;
+    
+    return 0;
+}
+int main(){
+    int h, w;
+    cin >> h >> w;
+     for (int hl = 1; hl <= h; hl++)
+    {
+        for (int wl = 1; wl <= w; wl++)
+        {
+            if(hl == 1 || hl == h){
+                cout << "#";
+            }
+            else if(wl == 1 || wl == w){
+                cout << "#";
+            }
+            else{
+                cout << ".";
+            }
+        }
+        cout << endl;
+    }
+}
+int main(){
+    int T, X;
+    cin >> T >> X;
+    int cnt = 0;
+    int temp;
+    vector<int> an(T+1);
+    vector<int> number;
+    vector<int> result;
+
+     for (int i = 0; i <= T; i++){
+         cin >> an[i];
+    }
+
+    for (int i = 0; i <= T;i++){
+        if(i==0)
+        {
+            number.push_back(0);
+            result.push_back(an[0]);
+        }
+
+        if(i!=0)
+        {
+            int temp = abs(an[i] - result.back());
+            if(temp>=X)
+            {
+                number.push_back(i);
+                result.push_back(an[i]);
+            }
+        }
+    }
+
+    for (int i = 0; i < result.size();i++){
+        cout << number[i] << " " << result[i] << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int M, D;
+    cin >> M >> D;
+
+    set<pair<int, int>> gosekku = {
+        {1, 7}, {3, 3}, {5, 5}, {7, 7}, {9, 9}
+    };
+
+    pair<int, int> date = {M, D};
+
+    if (gosekku.find(date) != gosekku.end()) {
+        cout << "Yes" << endl;
+    } else {
+        cout << "No" << endl;
+    }
+
+    return 0;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> number(n+1);
+    for (int i = 1; i <= n;i++){
+        cin >> number[i];
+    }
+
+    int x;
+    cin >> x;
+    cout << number[x] << endl;
+    return 0;
+}
+int main()
+{
+    int N, K;
+    cin >> N >> K;
+    
+    map<long long, long long> cnt;
+    for (int i = 0; i < N; i++) {
+        long long x;
+        cin >> x;
+        cnt[x]++;
+    }
+    
+    long long total_sum = 0;
+    for (auto& p : cnt) {
+        total_sum += p.first * p.second;
+    }
+    
+    priority_queue<pair<long long, long long>> pq;
+    for (auto& p : cnt) {
+        pq.push({p.first * p.second, p.first});
+    }
+    
+    for (int op = 0; op < K && !pq.empty(); op++) {
+        total_sum -= pq.top().first;  // C++11兼容写法
+        pq.pop();
+    }
+    
+    cout << total_sum << endl;
+    return 0;
+}
+int main(){
+    int n;
+    cin >> n;
+    int result = 1000;
+    int rating[8] = {0};
+    while (n--)
+    {
+        int number;
+        cin >> number;
+
+        result += number;
+        if(result>=0&&result<=699)
+        {
+            rating[1]++;
+        }
+
+        if(result>=700&&result<=1099)
+        {
+            rating[2]++;
+        }
+
+        if(result>=1100&&result<=1499)
+        {
+            rating[3]++;
+        }
+
+        if(result>=1500&&result<=1999)
+        {
+            rating[4]++;
+        }
+
+        if(result>=2000&&result<=2399)
+        {
+            rating[5]++;
+        }
+
+        if(result>=2400&&result<=2799)
+        {
+            rating[6]++;
+        }
+
+        if(result>=2800)
+        {
+            rating[7]++;
+        }
+    }
+
+    for (int i = 1; i < 8;i++){
+        cout << rating[i];
+        if(i<7){
+            cout << " ";
+        }
+    }
+
+    return 0;
+}
+int main(){
+    int N, W;
+    cin >> N >> W;
+    vector<pair<long long, long long>> stars;
+
+   for (int i = 0; i < N;i++){
+        int x, b;
+        cin >> x >> b;
+        stars.push_back({x, b});
+    }
+
+    sort(stars.begin(), stars.end());
+
+    // for (int i = 0; i < N;i++){
+    //     cout << stars[i].first<<":"<<stars[i].second<<endl;
+    // }
+
+    long long max_sum=0;
+    long long current_sum = 0;
+    int left = 0;
+
+    for (int right = 0; right < N; right++) {
+        current_sum += stars[right].second;
+
+        while (stars[right].first>stars[left].first+W)
+        {
+            current_sum -= stars[left].second;
+            left++;
+        }
+
+        max_sum = max(max_sum, current_sum);
+    }
+
+    cout << max_sum << endl;
+    return 0;
+}
+int main()
+{
+    int N;
+    cin >> N;
+    vector<long long> id(N + 1, 0);
+    vector<long long> prefix(N + 1, 0);
+
+    for (int i = 1; i <= N;i++){
+        cin >> id[i];
+        prefix[i] = prefix[i - 1] + id[i];
+    }
+
+    vector<int> first_occurrence(7, -1);
+    first_occurrence[0] = 0;
+    int max_length = 0;
+
+    for (int i = 1; i <= N;i++){
+        int r = prefix[i] % 7;
+        if(first_occurrence[r]==-1)first_occurrence[r] = i;
+        else{
+            int current_length = i - first_occurrence[r];
+            max_length = max(max_length, current_length);
+        }
+    }
+
+    cout << max_length << endl;
+    return 0;
+}
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int N,K;
+    cin >> N >> K;
+
+    unordered_map<int, long long> mod_count;
+    mod_count[0] = 1;
+
+    vector<long long> number(N + 1, 0);
+    vector<long long> prefix(N + 1, 0);
+    long long cnt = 0;
+
+    for (int i = 1; i <= N;i++){
+        cin >> number[i];
+        prefix[i] = prefix[i - 1] + number[i];
+        int mod = prefix[i] % K;
+
+        cnt += mod_count[mod];
+        mod_count[mod]++;
+        // cout << "prefix[i]:" << prefix[i] << endl;
+    }
+
+    // for (int i = 1; i <= N;i++){
+    //     if(prefix[i]%K==0)
+    //         cnt++;
+    // }
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int N, Q;
+    cin >> N >> Q;
+    vector<long> prefix_1(N + 1,0);
+    vector<long> prefix_2(N + 1,0);
+    vector<long> prefix_3(N + 1,0);
+
+    vector<long> cow_1(N + 1,0);
+    vector<long> cow_2(N + 1,0);
+    vector<long> cow_3(N + 1,0);
+
+    for (int i = 1; i <= N;i++){
+        int cow_number;
+        cin >> cow_number;
+        if(cow_number==1){
+            cow_1[i]++;
+        }
+        if(cow_number==2){
+            cow_2[i]++;
+        }
+        if(cow_number==3){
+            cow_3[i]++;
+        }
+    }
+
+    for (int i = 1; i <= N;i++)
+    {
+        prefix_1[i] = prefix_1[i - 1] + cow_1[i];
+        prefix_2[i] = prefix_2[i - 1] + cow_2[i];
+        prefix_3[i] = prefix_3[i - 1] + cow_3[i];
+    }
+
+    while(Q--){
+        int l, r;
+        cin >> l >> r;
+        cout << prefix_1[r] - prefix_1[l - 1] << " "
+             << prefix_2[r] - prefix_2[l - 1] << " "
+             << prefix_3[r] - prefix_3[l - 1] << endl;
+    }
+}
+int main(){
+    int n;
+    cin >> n;
+    long long sum = 0;
+    long long sum_sum = 0;
+    while(n--){
+        long long number;
+        cin >> number;
+        sum += number;
+        sum_sum += number * number;
+    }
+
+    long long result = (sum * sum - sum_sum) / 2;
+    cout << result << endl;
+    return 0;
+}
+int main()
+{
+    int T;
+    cin >> T;
+    while(T--){
+        long long n;
+        cin >> n;
+        vector<long long> number(n + 1, 0);
+        vector<long long> prefix(n + 1, 0);
+        long long sum = 0;
+        for (int i = 1; i <= n;i++){
+            cin >> number[i];
+            sum += number[i];
+        }
+
+        for (int i = 1; i <= n - 1;i++){
+            prefix[i] = prefix[i - 1] + number[i];
+        }
+            if (sum % 2 != 0)
+            {
+                cout << "No" << endl;
+            }
+            else{
+                bool temp = 0;
+                for (int i = 1; i < n ;i++)
+                {
+                    if(prefix[i]==sum/2)
+                    {
+                        temp = 1;
+                    }
+                }
+                if(temp==0)
+                    cout << "No" << endl;
+                else
+                    cout << "Yes" << endl;
+        }
+    }
+    return 0;
+}
+int main(){
+    long long n, m;
+    cin >> n >> m;
+
+    vector<bool> is_prime(m + 1,true);
+    is_prime[0] = is_prime[1] = 0;
+    for (int i = 2; i <= sqrt(m);i++){
+        if(is_prime[i]==1){
+            for (int j = i * i; j <= m;j+=i)
+            {
+                is_prime[j] = 0;
+            }
+        }
+    }
+
+    vector<long long> prefix(m + 1);
+    prefix[0] = 0;
+    for (int k = 1; k <= m;k++){
+        prefix[k] = prefix[k - 1] + (is_prime[k] ? 1 : 0);
+    }
+
+        while (n--)
+        {
+            long long l, r;
+            cin >> l >> r;
+            if (r > m || r < 1 || l < 1 || l > r || l > m)
+            {
+                cout << "Crossing the line" << endl;
+            }
+            else{
+                long long result = prefix[r] - prefix[l - 1];
+                cout << result << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin >> n;
+    vector<int> number(n+1);
+    for (int i = 1; i <= n;i++){
+        cin >> number[i];
+    }
+
+    vector<long long> prefix(n+1);
+    prefix[0] = number[0];
+    for (int i = 1; i <= n;i++){
+        prefix[i] = prefix[i - 1] + number[i];
+    }
+
+    int T;
+    cin >> T;
+    while (T--)
+    {
+        int l, r;
+        cin >> l >> r;
+        cout << prefix[r] - prefix[l - 1] << endl;
+    }
+    return 0;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int T;
+    cin >> T;
+    while(T--) {
+        long long n, x;
+        cin >> n >> x;
+        
+        // 当x为奇数：只能是a[1]或a[2]，取a[1]时结果最小
+        if(x % 2 == 1) {
+            cout << x * (1LL << (n-2)) << endl;
+            continue;
+        }
+        
+        // 当x为偶数：不断除2直到得到奇数
+        long long first_num = x;
+        long long count = 2;  // 已经包含了x和前面的数
+        
+        while(first_num % 2 == 0 && count < n) {
+            first_num /= 2;
+            count++;
+        }
+        
+        cout << first_num * (1LL << (n-2)) << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    vector<long long> temp(n+1);
+    for (int i = 1; i <= n;i++)
+    {
+        cin >> temp[i];
+    }
+
+    vector<long long> prefix(n+1);
+    prefix[0] = 0;
+    for (int j = 1; j <= n;j++)
+    {
+        prefix[j] = prefix[j - 1] + temp[j];
+    }
+    long long min_sum = LLONG_MAX;
+
+    for (int k = 1; k <= n - m + 1;k++)
+    {
+        long long temp_num = prefix[k + m - 1] - prefix[k - 1];
+        min_sum = min(min_sum, temp_num);
+    }
+
+    cout << min_sum << endl;
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> number(n);
+    for (int i = 0; i < n; i++)
+    {
+        int temp_number;
+        cin >> temp_number;
+        number[i] = temp_number;
+    }
+
+    for (int j = 1; j <= q; j++)
+    {
+        int need_number;
+        cin >> need_number;
+        
+        int min_greater = -1;
+        int max_less = -1;
+        
+        for (int k = 0; k < number.size(); k++)
+        {
+            if (number[k] > need_number)
+            {
+                if (min_greater == -1 || number[k] < min_greater) 
+                {
+                    min_greater = number[k];
+                }
+            }
+            if (number[k] < need_number) 
+            {
+                if (max_less == -1 || number[k] > max_less) 
+                {
+                    max_less = number[k];
+                }
+            }
+        }
+        
+        cout << min_greater << " " << max_less << endl;
+    }
+    
+    return 0;
+}
+int main()
+{
+    for (int a = 100; a <= 333;a++)
+    {
+        int number[10] = {0};
+
+        int b = 2 * a;
+        int c = 3 * a;
+
+        string a_str = to_string(a);
+        string b_str = to_string(b);
+        string c_str = to_string(c);
+
+        for (int i = 0; i < a_str.size();i++)
+        {
+            number[a_str[i] - '0']++;
+            number[b_str[i] - '0']++;
+            number[c_str[i] - '0']++;
+        }
+
+        bool temp = 0;
+        for (int j = 1; j < 10;j++)
+        {
+            if(number[j]!=1)
+            {
+                temp = 1;
+            }
+        }
+
+        if(temp==0)
+        {
+            cout << "   " << endl;
+            cout << a << " " << b << " " << c << endl;
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    bool hang[5003] = {0}, lei[5003] = {0};
+
+    int n, m, b, g;
+    cin >> n >> m >> b >> g;
+    int cnt_b = 0, cnt_g = 0;
+
+    for (int i = 1; i <= b;++i)
+    {
+        int x, y;
+        cin >> x >> y;
+        for (int j = x; j <= y;j++)
+        {
+            hang[j] = 1;
+        }
+    }
+
+     for (int i = 1; i <= g;++i)
+    {
+        int x, y;
+        cin >> x >> y;
+        for (int j = x; j <= y;j++)
+        {
+            lei[j] = 1;
+        }
+    }
+
+    for(int i=1;i<=n;i++)
+     {if(hang[i])
+             cnt_b++;
+     }
+    for(int i=1;i<=m;i++)
+     {if(lei[i])
+             cnt_g++;
+     }
+
+    cout << m * cnt_b + n * cnt_g - cnt_b * cnt_g << endl;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    long long total = 0;
+    vector<string> name;
+    vector<int> number;
+    for (int i = 0; i < n;i++)
+    {
+        string name_temp;
+        int number_temp;
+        cin >> name_temp >> number_temp;
+        name.push_back(name_temp);
+        number.push_back(number_temp);
+        total += number_temp;
+    }
+
+    int target = total / number.size() / 2;
+    vector<int> to_reach;
+    for (int j = 0; j < n;j++)
+    {
+        int temp = abs(target - number[j]);
+        to_reach.push_back(temp);
+    }
+
+    int min_reach = to_reach[0];
+    int winner_idx = 0;
+    for (int k = 0; k < n;k++)
+    {
+        if(to_reach[k]<min_reach)
+        {
+            min_reach = to_reach[k];
+            winner_idx = k;
+        }
+    }
+
+    cout << target << " " << name[winner_idx] << endl;
+    return 0;
+}
+int main()
+{
+    vector<int> mood;
+    for (int i = 0; i < 24;i++)
+    {
+        int number;
+        cin >> number;
+        mood.push_back(number);
+    }
+    while(1)
+    {
+        int time;
+        cin >> time;
+        if(time>=0&&time<=23)
+        {
+            cout << mood[time] <<" ";
+            if(mood[time]>50)
+            {
+                cout << "Yes" << endl;
+            }
+            else
+            {
+                cout << "No" << endl;
+            }
+        }
+
+        else
+        {
+            break;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n;i++)
+    {
+        int number;
+        cin >> number;
+        string num = to_string(number);
+        int temp = 0;
+        for (int j = 0; j < num.size();j++)
+        {
+            temp += num[j] - '0';
+        }
+        if(temp%7==0)
+        {
+            cout << "Yes" << endl;
+        }
+        else
+        {
+            cout << "No" << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int n, k;
+    cin >> n >> k;
+    int cnt = 0;
+    for (int i = 1; i <= n;i++)
+    {
+        string num= to_string(i);
+        for (int j = 0; j < num.size(); j++)
+        {
+            if(num[j]=='0' + k)
+            {
+                cnt++;
+            }
+        }
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> number;
+    for (int i = 1; i <= n;i++)
+    {
+        int num;
+        cin >> num;
+        number.push_back(num);
+    }
+    for (int j = 0;j<n;j++)
+    {
+        int target = number[j];
+        bool found = false;
+        for (int k = 1; k * k < target; k++)
+        {
+            int remain = target - k * k;
+            int y = sqrt(remain);
+            if(y*y==remain&&y>0)
+            {
+                found = true;
+                break;
+            }
+        }
+        if(found)
+        {
+            cout << "Yes" << endl;
+        }
+        else
+        {
+            cout << "No" << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    long long result = 1;
+    for (int i = 1; i <= n;i++)
+    {
+        int temp;
+        cin >> temp;
+        result *= temp;
+    }
+
+    if(result<1000000)
+    {
+        cout << result << endl;
+    }
+    else
+    {
+        cout << ">1000000" << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    long long a, b, m, N;
+    cin >> a >> b >> m >> N;
+
+    long long result = 0;
+   
+    if(a >= m) 
+    {
+        cout << 0 << endl;
+        return 0;
+    } 
+    else 
+    {
+        result += a;
+        if(N == 1) 
+        {
+            cout << result << endl;
+            return 0;
+        }
+    }
+    
+    if(b >= m) 
+    {
+        cout << result << endl;  // 只包含第一天的题目数
+        return 0;
+    } 
+    else 
+    {
+        result += b;
+        if(N == 2) 
+        {
+            cout << result << endl;
+            return 0;
+        }
+    }
+
+    vector<long long> do_number(N + 2);
+    do_number[1] = a;
+    do_number[2] = b;
+    do_number[3] = do_number[2] + do_number[1];
+
+
+    for (int i = 3; i <= N;i++)
+    {
+        result += do_number[i];
+      
+        if(i>=2 && i+1<=N)
+        {
+            do_number[i + 1] = do_number[i] + do_number[i - 1];
+        }
+
+        if(do_number[i]>=m)
+        {
+            break;
+        }
+    }
+    cout << result << endl;
+    return 0;
+}
+int main()
+{
+    string abc;
+    cin >> abc;
+    int abc_cnt[26] = {0};
+    vector<int> abc_goal;
+    for (int i = 0; i < 26;i++)
+    {
+        int goal;
+        cin >> goal;
+        abc_goal.push_back(goal);
+    }
+    for (int j = 0; j < abc.size();j++)
+    {
+        abc_cnt[abc[j] - 'a']++;
+    }
+
+    long long result = 0;
+
+    for (int k = 0; k < 26;k++)
+    {
+        cout << abc_cnt[k];
+        if(k<25)
+        {
+            cout << " ";
+        }
+        result += abc_cnt[k] * abc_goal[k];
+    }
+    cout << endl
+         << result << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    
+    int count = 0;
+    while(n != 495) {
+        string s = to_string(n);
+        while(s.length() < 3) {
+            s = "0" + s;
+        }
+        
+        string temp = s;
+        sort(temp.begin(), temp.end());
+        int min_val = stoi(temp);
+        
+        temp = s;
+        sort(temp.begin(), temp.end());
+        reverse(temp.begin(), temp.end());
+        int max_val = stoi(temp);
+        
+        n = max_val - min_val;
+        count++;
+    }
+    
+    cout << count << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int cnt = 0;
+    for (int i = 1; i <= n;i++)
+    {
+        for (int j = 1; j <= i;j++)
+        {
+            char a = 'A' + (cnt % 26);
+            cout << a;
+            cnt++;
+        }
+        cout << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int x, y, z, m, n;
+    int cnt = 0;
+    cin >> x >> y >> z >> m >> n;
+
+    int max_a = (x > 0) ? min(m, n / x) : m;
+    for (int a = 0; a <= max_a;a++)
+    {
+        int max_b = (y > 0) ? min(m - a, (n - a * x) / y) : m - a;
+        for (int b = 0; b <= max_b;b++)
+        {
+            int rest_chi = m - a - b;
+            int rest_money = n - a * x - b * y;
+
+            if(rest_chi>=0 && rest_chi%z==0 && rest_money >= 0 && (rest_chi/z==rest_money))
+            {
+                cnt++;
+            }
+        }
+    }
+
+    cout << cnt << endl;
+}
+int main()
+{
+    long long n;
+    cin >> n;
+    map<int, int> cnt;
+    for (int i = 1; i <= n;i++)
+    {
+        int number;
+        cin >> number;
+        cnt[number]++;
+    }
+
+    for (auto&p:cnt)
+    {
+        cout << p.first << " " << p.second << endl;
+    }
+    return 0;
+}
+int main()
+{
+    string str;
+    cin >> str;
+    int abc[26]={0};
+
+    int min_cnt = INT_MAX;
+    int max_cnt = 0;
+
+    for (int i = 0; i < str.size();i++)
+    {
+        abc[str[i] - 'a']++;
+    }
+
+    for (int j = 0; j < 26;j++)
+    {
+        if(abc[j]!=0)
+        {
+            min_cnt = min(min_cnt, abc[j]);
+            max_cnt = max(max_cnt, abc[j]);
+        }
+    }
+
+    int result = max_cnt - min_cnt;
+    bool temp = 0;
+    if (result <= 1) 
+    {
+        temp = 1;
+    }
+    for (int k = 2; k <= sqrt(result);k++)
+    {
+        if(result%k==0)
+        {
+            temp = 1;
+            break;
+        }
+    }
+
+    if(temp==0)
+    {
+        cout << "Lucky Word" << endl;
+        cout << result << endl;
+    }
+    else
+    {
+        cout << "No Answer" << endl;
+        cout << "0" << endl;
+    }
+    return 0;
+}
+int main()
+{
+    // 预处理：建立单词到数字的映射表
+    map<string, int> word_to_num;
+    
+    // 添加正规数字单词
+    word_to_num["zero"] = 0;
+    word_to_num["one"] = 1;
+    word_to_num["two"] = 2;
+    word_to_num["three"] = 3;
+    word_to_num["four"] = 4;
+    word_to_num["five"] = 5;
+    word_to_num["six"] = 6;
+    word_to_num["seven"] = 7;
+    word_to_num["eight"] = 8;
+    word_to_num["nine"] = 9;
+    word_to_num["ten"] = 10;
+    word_to_num["eleven"] = 11;
+    word_to_num["twelve"] = 12;
+    word_to_num["thirteen"] = 13;
+    word_to_num["fourteen"] = 14;
+    word_to_num["fifteen"] = 15;
+    word_to_num["sixteen"] = 16;
+    word_to_num["seventeen"] = 17;
+    word_to_num["eighteen"] = 18;
+    word_to_num["nineteen"] = 19;
+    word_to_num["twenty"] = 20;
+    
+    // 添加特殊单词
+    word_to_num["a"] = 1;
+    word_to_num["both"] = 2;
+    word_to_num["another"] = 1;
+    word_to_num["first"] = 1;
+    word_to_num["second"] = 2;
+    word_to_num["third"] = 3;
+
+    string sentence;
+    getline(cin, sentence);  // 读取整行
+    
+    vector<int> numbers;  // 存储找到的数字
+    
+    // 将句子按空格分割成单词
+    stringstream ss(sentence);
+    string word;
+    while(ss >> word) {
+        // 去掉可能的标点符号（如句号）
+        if(word.back() == '.' || word.back() == ',' ||
+         word.back() == '?' || word.back() == '!') 
+        {
+            word.pop_back();  // 移除最后一个字符
+        }
+        
+        // 查找映射表
+        if(word_to_num.count(word)) 
+        {  // 如果单词存在于映射表中
+            int num = word_to_num[word];
+            numbers.push_back((num * num) % 100);  // 平方后取模
+        }
+    }
+    
+    for(int x : numbers) 
+    {
+        cout << x;
+    }
+    cout << endl;
+    
+    return 0;
+
+}
+int main()
+{
+    int weekdays[7] = {0};
+    int cnt = 0;
+    int max_hours = 0;
+    for (int i = 0; i <= 6;i++)
+    {
+        int study, more;
+        cin >> study >> more;
+        if(study+more>=8)
+        {
+            weekdays[i] = study + more;
+            cnt++;
+            max_hours = max(max_hours, weekdays[i]);
+        }
+    }
+    for (int j = 0; j <= 6;j++)
+    {
+        if(weekdays[j]==max_hours)
+        {
+            cout << j + 1 << endl;
+            break;
+        }
+    }
+    if(cnt==0)
+    {
+        cout << "0" << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n;i++)
+    {
+        string player_1;
+        string player_2;
+        cin >> player_1 >> player_2;
+
+        if(player_1 == player_2)
+        {
+            cout << "Tie" << endl;
+        }
+
+        else if((player_1=="Rock"&&player_2=="Scissors")||
+        (player_1=="Scissors"&&player_2=="Paper")||
+        (player_1=="Paper"&&player_2=="Rock"))
+        {
+            cout << "Player1" << endl;
+        }
+
+        
+        else
+        {
+            cout << "Player2" << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int T, S, t;
+    cin >> T >> S >> t;
+    if(T >= 35) 
+{
+    if(S == 1 && t >= 33) 
+    {  // 需要同时满足S=1和t>=33
+        cout << "Bu Tie" << endl;
+        cout << T << endl;
+    } 
+    else if(S == 0) 
+    {
+        cout << "Shi Nei" << endl;
+        cout << T << endl;
+    }
+    else 
+    { // S == 1 && t < 33
+        cout << "Bu Re" << endl;
+        cout << t << endl;
+    }
+} 
+    else 
+    { // T < 35
+        if(t < 33) 
+        {
+            cout << "Shu Shi" << endl;
+            cout << t << endl;
+        } 
+        else 
+        { // t >= 33
+            cout << "Bu Re" << endl;
+            cout << t << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    string str;
+    getline(cin, str);
+    int cnt = 0;
+    for (int i = 0; i < str.size();i++)
+    {
+        if(str[i]!=' ')
+        {
+            cnt++;
+        }
+    }
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    int cnt[10] = {0};
+    int n, x;
+    cin >> n >> x;
+    for (int i = 1; i <= n;i++)
+    {
+        string number = to_string(i);
+        for (int j = 0; j <= number.size();j++)
+        {
+            cnt[number[j]-'0']++;
+        }
+    }
+
+    cout << cnt[x] << endl;
+    return 0;
+}
+struct student
+{
+    string name;
+    string subject;
+    int result;
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    map<pair<string, string>, student> records;
+
+    for (int i = 0; i < n;i++)
+    {
+        student s;
+        cin >> s.name >> s.subject >> s.result;
+        
+        pair<string, string> key = {s.name, s.subject};
+        
+        if(s.result > records[key].result)  
+        {
+            records[key] = s;  
+            cout << s.name << " " << s.subject << " " << s.result << endl;
+        }
+    }
+    return 0;
+}
+struct Record
+{
+    string time;
+    int problem_id;
+    int score;
+};
+
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> max_score(m + 1, -1);
+    vector<Record> records_to_check;
+
+    for (int i = 0; i < n;i++)
+    {
+        string date, time_str;
+        int prob_id, score_val;
+        
+        cin >> date >> time_str >> prob_id >> score_val;  
+        
+        string full_time = date + " " + time_str;  
+
+        if(score_val > max_score[prob_id])
+        {
+            max_score[prob_id] = score_val;  
+            
+            
+            Record new_record;
+            new_record.time = full_time;
+            new_record.problem_id = prob_id;
+            new_record.score = score_val;
+            
+            records_to_check.push_back(new_record);  
+        }
+    }
+
+    for(auto& record : records_to_check)
+    {
+        cout << record.time << " " << record.problem_id << " " << record.score << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int number;
+    cin >> number;
+    string str;
+    cin >> str;
+    int i = 0;
+    while(i<str.length()&&str[i]=='o')
+    {
+        i++;
+    }
+    string result = str.substr(i);
+    cout << result;
+    return 0;
+}
+int main()
+{
+    int x;
+    cin >> x;
+    x = x + 5;
+    if(x >= 24)  
+    {
+        cout << x - 24 << endl;
+    }
+    else
+    {
+        cout << x << endl;
+    }
+}
+int main()
+{
+    int second;
+    cin >> second;
+    int hh = second / 3600;
+    int mm = second % 3600 / 60;
+    int ss = second - mm * 60 - hh * 3600;
+    cout << hh << " " << mm << " " << ss;
+    return 0;
+}
+int main()
+{
+    int N;
+    cin >> N;
+    int n = 0;
+    for (int i = 0; i < N; i++)
+    {
+        if(N<3)
+        {
+            n = 0;
+            break;
+        }
+        if(N==3)
+        {
+            n = 3;
+            break;
+        }
+        if(n<=N)
+        {
+            n += 3;
+        }
+    }
+
+    cout << n;
+    return 0;
+}
+int main()
+{
+    long long x;
+    cin >> x;
+    if(x>x*x)
+    {
+        cout << "left" << endl;
+    }
+    else if(x<x*x)
+    {
+        cout << "right" << endl;
+    }
+    else
+    {
+        cout << "equal" << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int number;
+    cin >> number;
+    if(number<=1599)
+    {
+        cout << "Rated" << endl;
+    }
+    else
+    {
+        cout << "Unrated" << endl;
+    }
+
+    return 0;
+}
+vector<bool> is_prime;
+vector<int> prime;
+
+void sieve(int n)
+{
+    is_prime.assign(n + 1, true);
+    is_prime[0] = is_prime[1] = false;
+
+    /*埃氏筛会超时（TLE）*/
+    // for (int i = 2; i <= n;i++)
+    // {
+    //     if(is_prime[i]==true)
+    //     {
+    //         if((long long)i * i <= n) {
+    //             for (long long j = (long long)i * i; j <= n; j += i) 
+    //             {
+    //                 is_prime[j] = false;
+    //             }
+    //         }
+    //     }
+    // }
+
+    /*改为欧式筛*/
+    for (int i = 2; i <= n;i++)
+    {
+        if(is_prime[i])
+        {
+            prime.push_back(i);
+        }
+
+        for (int j = 0; j < prime.size() && i * prime[j] <= n;j++)
+        {
+            is_prime[i * prime[j]] = false;
+            if(i%prime[j]==0)
+            break;
+        }
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int n, q;
+    cin >> n >> q;
+    
+    sieve(n);
+    
+    while(q--) 
+    {
+        int k;
+        cin >> k;
+        cout << prime[k - 1] << endl;
+    }
+    
+    return 0;
+}
+long long qpow(long long a,long long b,long long p)
+{
+    long long res = 1 % p;
+    while(b)
+    {
+        if(b & 1)
+        {
+            res = (res * a) % p;
+        }
+        a=(a*a)%p;
+        b >>= 1;
+    }
+    return res;
+}
+int main()
+{
+    long long a, b, p;
+    cin >> a >> b >> p;
+    long long result = qpow(a, b, p);
+    cout << a << "^" << b << " " << "mod " << p << "=" << result;
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    cin >> n;
+    queue<long long> qu;
+
+    for (int i = 0; i < n;i++)
+    {
+        int op;
+        cin >> op;
+
+        if(op == 1)
+        {
+            int x;
+            cin >> x;
+            qu.push(x);
+        }
+        else if(op == 2)
+        {
+            if(qu.empty())
+            {
+                cout << "ERR_CANNOT_POP" << endl;
+            }
+            else
+            {
+                qu.pop();
+            }
+        }
+        else if(op == 3)
+        {
+            if(qu.empty())
+            {
+                cout << "ERR_CANNOT_QUERY" << endl;
+            }
+            else
+            {
+                cout << qu.front() << endl;
+            }
+        }
+        else if(op == 4)
+        {
+            cout << qu.size() << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int T;
+    cin >> T;
+    while(T--)
+    {
+        int n;
+        cin >> n;
+        stack<unsigned long long> st;
+
+        for (int i = 0; i < n;i++)
+        {
+            string op;
+            cin >> op;
+
+            if(op == "push")
+            {
+                unsigned long long x;
+                cin >> x;
+                st.push(x);
+            }
+
+            else if(op == "pop")
+            {
+                if(st.empty())
+                {
+                    cout << "Empty" << endl;
+                }
+                else
+                {
+                    st.pop();
+                }
+            }
+
+            else if(op == "query")
+            {
+               if(st.empty())
+                {
+                    cout << "Anguei!" << endl;
+                }
+                else
+                {
+                    cout << st.top() << endl;
+                } 
+            }
+
+            else if(op == "size")
+            {
+                cout << st.size() << endl;
+            }
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> number;
+    for (int i = 0; i < n;i++)
+    {
+        int temp;
+        cin >> temp;
+        number.push_back(temp);
+    }
+
+    sort(number.begin(), number.end());
+
+    for (int j = 0; j < n;j++)
+    {
+        cout << number[j];
+        if(j<n-1)
+        {
+            cout << " ";
+        }
+    }
+    cout << endl;
+    return 0;
+}
+int main()
+{
+    long long a,b,n;
+    cin >> a >> b >> n;
+    int day = 1;
+    long long weekly_sum = 5 * a + 2 * b;
+
+    long long full_week = n / weekly_sum;
+    long long remaining_need = n % weekly_sum;
+
+    long long days = full_week * 7;
+
+    if(remaining_need>0)
+   { 
+        long long current = 0;
+        for (int day = 1;day <= 7 && current < remaining_need; day++)
+        {
+            if(day == 1 || day == 2 || day == 3 || day == 4 || day == 5)
+            {
+                current += a;
+            }
+            else
+            {
+                current += b;
+            }
+
+            days++;
+
+            if(current>=remaining_need)
+            {
+                break;
+            }
+           
+        }
+    }
+
+    cout << days << endl;
+    return 0;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    cin.ignore();
+    for (int i = 1; i <= t; i++)
+    {
+        string temp;
+        getline(cin, temp);
+        cout << temp[0];
+        for (int j = 0; j < temp.size();j++)
+        {
+            if(temp[j]==' '&&(j+1)<temp.size())
+            {
+                cout << temp[j + 1];
+            }
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    for (int i = 1; i <= t;i++)
+    {
+        int temp, number_size;
+        cin >> temp >> number_size;
+        int result = (number_size % 2) * temp;
+        
+        cout << result << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n;i++)
+    {
+        int cnt[26] = {0};
+        string str1;
+        cin>>str1;
+        for (int j = 0; j < str1.size();j++)
+        {
+            int temp = str1[j] - 'a';
+            cnt[temp]++;
+        }
+
+        string str2;
+        cin>>str2;
+
+        for (int j = 0; j < str2.size();j++)
+        {
+            int temp = str2[j] - 'a';
+            cnt[temp]--;
+        }
+
+        bool allZero = true;
+        for(int k = 0; k < 26; k++) 
+        {
+            if(cnt[k] != 0) 
+            {
+                allZero = false;
+                break;
+            }
+        }
+        if(allZero) cout << "YES" << endl;
+        else cout << "NO" << endl;
+        }
+
+    return 0;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    cin.ignore();
+    for (int i = 1; i <= t;i++)
+    {
+        int cnt = 0;
+        string number;
+        getline(cin, number);
+        char temp = number[0];
+        for (int j = 0; j < number.size();j++)
+        {
+            if(number[j] != ' ' && number[j] == temp)
+            {
+                cnt++;
+            }
+        }
+
+        if(cnt==4)
+        {
+            cout << "YES" << endl;
+        }
+
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    vector<int> number;
+    for (int i = 0; i < 7;i++)
+    {
+        int temp;
+        cin >> temp;
+        number.push_back(temp);
+    }
+
+    int max_num = number[0];
+    int sum_temp = 0;
+
+    for (int j = 0; j < 7;j++)
+    {
+        sum_temp += number[j];
+        max_num = max(max_num, number[j]);
+    }
+
+    int result = max_num * 2 - sum_temp;
+
+    cout << result << endl;
+    return 0;
+}
+int main()
+{
+    int a, b, c, x;
+    cin >> a >> b >> c >> x;
+
+    int count = 0;
+
+    for (int i = 0; i <= a;i++)
+    {
+        for (int j = 0; j <= b;j++)
+        {
+            int remaining = x - 500 * i - 100 * j;
+            
+            if(remaining >= 0 && remaining % 50 == 0)
+            {
+                    int need_c = remaining / 50;
+
+                    if(need_c<=c)
+                    {
+                        count++;
+                    }
+            }
+        }
+    }
+
+    cout << count << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<long long> number;
+    for (int i = 0; i < n;i++)
+    {
+        long long temp;
+        cin >> temp;
+        number.push_back(temp);
+    }
+
+    vector<int> cnt_num(n);
+
+    for (int j = 0; j < n;j++)
+    {
+        int cnt = 0;
+        while(number[j]%2==0)
+        {
+            number[j] = number[j] / 2;
+            cnt++;
+        }
+         cnt_num[j] = cnt;
+    }
+
+    int min_cnt = cnt_num[0];
+    for (int k = 0; k < n;k++)
+    {
+        min_cnt = min(min_cnt, cnt_num[k]);
+    }
+
+    cout << min_cnt << endl;
+    return 0;
+}
+int main()
+{
+    string s3;
+    cin >> s3;
+    int cnt = 0;
+    for (int i = 0; i < 3;i++)
+    {
+        if(s3[i]=='1')
+        {
+            cnt++;
+        }
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    long long a, b;
+    cin >> a >> b;
+    long long result = a * b;
+    if(result%2==0)
+    {
+        cout << "Even" << endl;
+    }
+
+    else
+    {
+        cout << "Odd" << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    string input_word;
+    getline(cin, input_word);
+    if (!input_word.empty()) 
+    {
+        cout << char(toupper(input_word[0]));
+    }
+    for (int i = 1; i < input_word.size();i++)
+    {
+        if(input_word[i]==' '&&i+1<input_word.size())
+        {
+            cout << char(toupper(input_word[i + 1]));
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    string str;
+    cin >> str;
+    for (int i = 1;i<=m;i++)
+    {
+        int r, l;
+        cin >> r >> l;
+        char c1, c2;
+        cin >> c1 >> c2;
+        for (int j = r; j <= l;j++)
+        {
+            if(str[j-1]==c1)
+            {
+                str[j-1] = c2;
+            }
+        }
+    }
+
+    cout << str << endl;
+    return 0;
+}
+struct SqList
+{
+    int data[MaxSize];
+    int length;
+};
+
+void InitList(SqList *L)
+{
+    L->length = 0;
+}
+
+bool ListEmpty(SqList *L)
+{
+    // if(L->length==0)
+    // {
+    //     return true;
+    // }
+
+    // else
+    // {
+    //     return false;
+    // }
+
+    return (L->length == 0);
+}
+
+int ListLength(SqList *L)
+{
+    return L->length;
+}
+
+int GetElem(SqList *L,int i)
+{
+    if(i<1 || i>L->length)
+    {
+        return -1;
+    }
+    return L->data[i - 1];
+}
+
+bool ListInsert(SqList *L,int i,int e)
+{
+    if(i<1 || i>L->length+1)
+    {
+        return false;
+    }
+
+    if(L->length>=MaxSize)
+    {
+        return false;
+    }
+
+    for (int k = L->length - 1; k >= i - 1;k--)
+    {
+        L->data[k] = L->data[k + 1];
+    }
+
+    L->data[i - 1] = e;
+    L->length++;
+
+    return true;
+}
+
+bool ListDelete(SqList *L,int i,int &e)
+{
+     if(i<1 || i>L->length)
+    {
+        return false;
+    }
+
+    e = L->data[i - 1];
+    for (int k = i - 1; k < L->length - 1; k++)
+    {
+        L->data[k] = L->data[k + 1];
+    }
+    L->length--;
+    return true;
+}
+
+int main()
+{
+    SqList L;
+    InitList(&L);
+
+    int numElements;
+    cout << "????????????";
+    cin >> numElements;
+
+    if(numElements>MaxSize)
+    {
+        cout << "????????????" << MaxSize << endl;
+        return -1;
+    }
+
+    for (int i = 0; i < numElements;++i)
+    {
+        int element;
+        cout << "???????" << (i + 1) << "?????:";
+        cin >> element;
+
+        bool success = ListInsert(&L, L.length + 1, element);
+        if(!success)
+        {
+            cout << "?????" << (i + 1) << "??????????,???????";
+            break;
+        }
+
+        else
+        {
+            cout << "???????????" << element << endl;
+        }
+    }
+
+    cout << "???????????" << ListLength(&L) << endl;
+    cout << "?????��?????: ";
+    for(int j = 1; j <= ListLength(&L); ++j) 
+    {
+        cout << GetElem(&L, j) << " ";
+    }
+    cout << endl;
+
+    return 0;
+
+}
+int main()
+{
+    string str;
+    char a1, a2, a3, a4;
+    int n;
+    cin >> n >> a1 >> a2 >> a3 >> a4;
+    cin >> str;
+    for (int i = 0; i < n;i++)
+    {
+        if(str[i]==a1)
+        {
+            str[i] = a2;
+        }
+        if(str[i]==a3)
+        {
+            str[i] = a4;
+        }
+    }
+
+    cout << str << endl;
+    return 0;
+}
+int main()
+{
+    int m, n;
+    cin >> m >> n;
+    vector<int> number_1;
+    vector<int> number_2;
+    for (int i = 0; i < m;i++)
+    {
+        int number;
+        cin >> number;
+        number_1.push_back(number);
+    }
+
+    for (int j = 0; j < n;j++)
+    {
+        int number;
+        cin >> number;
+        number_2.push_back(number);
+    }
+
+    vector<int> number_result;
+    int i = 0;
+    int j = 0;
+
+    while ( i<m&&j<n ) 
+    {
+        if ( number_1[i] <= number_2[j] ) 
+        {
+            number_result.push_back(number_1[i]);
+            i++;
+        } 
+        else 
+        {
+            number_result.push_back(number_2[j]);
+            j++;
+        }
+    }
+
+    while( i < m ) 
+    {
+        number_result.push_back(number_1[i]);
+        i++;
+    }
+
+    while( j < n ) 
+    {
+        number_result.push_back(number_2[j]);
+        j++;
+    }
+
+    for(int k = 0; k < number_result.size(); k++) 
+    {
+        cout << number_result[k];
+        if(k != number_result.size() - 1) 
+        {
+            cout << " ";
+        }
+    }
+    cout << endl;
+
+}
+int main()
+{
+    long long a, b, c;
+    cin >> a >> b >> c;
+    long long s1 = a * a;
+    long long s2 = b * c;
+    if(s1>s2)
+    {
+        cout << "Alice" << endl;
+    }
+
+    else
+        cout << "Bob" << endl;
+
+    return 0;
+}
+int main()
+{
+    string number;
+    cin >> number;
+    int cnt = 0;
+    for (int i = 0; i < number.size();i++)
+    {
+        if(number[i]=='1')
+            cnt++;
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<bool> is_prime(n + 1, true);
+    is_prime[0] = false;
+    is_prime[1] = false;
+
+    for(int i = 2; i * i <= n; i++) 
+    {
+        if(is_prime[i]) 
+            {
+                for(int j = i * i; j <= n; j += i) 
+                {
+                    is_prime[j] = false;
+                }
+            }
+    }
+
+    for(int i = 2; i <= n; i++) 
+    {
+        if(is_prime[i]) 
+        {
+            cout << i << " ";
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> prism;
+    for (int i = 2; i <= n;i++)
+    {
+        bool prism_num = false;
+        for (int j = 2; j <= sqrt(i);j++)
+        {
+            if(i==2)
+            {
+                prism.push_back(i);
+            }
+            if(i%j==0)
+            {
+                prism_num = true;
+                break;
+            }
+        }
+
+        if(prism_num==false)
+        {
+            prism.push_back(i);
+        }
+    }
+
+    for (int k = 0; k < prism.size();k++)
+    {
+        cout << prism[k];
+        if(k<prism.size()-1)
+        {
+            cout << " ";
+        }
+    }
+
+    cout << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    for (int i = 0; i <= n;i++)
+    {
+        long long val = 1;
+        for (int j = 0; j < i;j++)
+        {
+            cout << val;
+            if(j<i-1)
+            {
+                val = val * (i - 1 - j) / (j + 1);
+            }
+
+            if(j<i-1)
+            {
+                cout << " ";
+            }
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int n;
+    char number;
+    cin >> n >> number;
+    int cnt = 0;
+    for (int i = 1; i <= n;i++)
+    {
+        string num = to_string(i);
+        for (int j = 0; j < num.size();j++)
+        {
+            if(num[j]==number)
+            {
+                cnt++;
+            }
+        }
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int calculateRange(vector<int>& arr)
+{
+    int max_val = arr[0];
+    int min_val = arr[0];
+    for (int i = 0; i < arr.size();i++)
+    {
+        min_val = min(min_val, arr[i]);
+        max_val = max(max_val, arr[i]);
+    }
+
+    return max_val - min_val;
+}
+
+double calculateVariance(vector<int>& arr)
+{
+    double sum = 0;
+    double temp = 0;
+    for (int i = 0; i < arr.size();i++)
+    {
+        sum += arr[i];
+    }
+
+    double avg = sum / arr.size();
+    for (int j = 0; j < arr.size();j++)
+    {
+        temp += (arr[j] - avg)*(arr[j] - avg);
+    }
+
+    double result = temp / arr.size();
+    return result;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n;i++)
+    {
+        int num_size;
+        cin >> num_size;
+        vector<int> number;
+        for (int j = 0; j < num_size;j++)
+        {
+            int num;
+            cin >> num;
+            number.push_back(num);
+        }
+        long long range = calculateRange(number);
+        double result = calculateVariance(number);
+        cout << range << " " << fixed << setprecision(3) 
+        << result << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+
+    double v = m * 0.8;
+    int g = ceil(v);
+
+    long long ans = (long long)n * g;
+
+    cout << ans << endl;
+
+    return 0;
+}
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+
+    while(t--) {
+        int n;
+        cin >> n;
+
+        for(int i = 1; i <= n; i++) {
+            cout << i << " ";
+        }
+        cout << '\n';
+    }
+
+    return 0;
+}
+struct SqList
+{
+    int data[MaxSize];
+    int length;
+};
+
+void InitList(SqList *L)
+{
+    L->length = 0;
+}
+
+bool ListEmpty(SqList *L)
+{
+    // if(L->length==0)
+    // {
+    //     return true;
+    // }
+
+    // else
+    // {
+    //     return false;
+    // }
+
+    return (L->length == 0);
+}
+
+int ListLength(SqList *L)
+{
+    return L->length;
+}
+
+int GetElem(SqList *L,int i)
+{
+    if(i<1 || i>L->length)
+    {
+        return -1;
+    }
+    return L->data[i - 1];
+}
+
+bool ListInsert(SqList *L,int i,int e)
+{
+    if(i<1 || i>L->length+1)
+    {
+        return false;
+    }
+
+    if(L->length>=MaxSize)
+    {
+        return false;
+    }
+
+    for (int k = L->length - 1; k >= i - 1;k--)
+    {
+        L->data[k] = L->data[k + 1];
+    }
+
+    L->data[i - 1] = e;
+    L->length++;
+
+    return true;
+}
+
+bool ListDelete(SqList *L,int i,int &e)
+{
+     if(i<1 || i>L->length)
+    {
+        return false;
+    }
+
+    e = L->data[i - 1];
+    for (int k = i - 1; k < L->length - 1; k++)
+    {
+        L->data[k] = L->data[k + 1];
+    }
+    L->length--;
+    return true;
+}
+
+int main()
+{
+    SqList L;
+    InitList(&L);
+    ListInsert(&L, 1, 10);
+    ListInsert(&L, 2, 8);
+    ListInsert(&L, 3, 5);
+    cout << ListLength(&L) << endl;
+    int deletedValue;
+    ListDelete(&L, 2, deletedValue);
+    cout<< L.length << endl;
+    cout << ListLength(&L) << endl;
+    return 0;
+}
+int main()
+{
+    vector<int> temp(5001,0);
+    vector<int> number;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n;i++)
+    {
+        int num;
+        cin >> num;
+        if(temp[num]==0)
+        {
+            number.push_back(num);
+            temp[num] = 1;
+        }
+
+        if(temp[num]==1)
+        {
+            continue;
+        }
+    }
+
+    for (int j = 0; j < number.size();j++)
+    {
+        cout << number[j];
+        if(j>j-1)
+        {
+            cout << " ";
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    vector<int> number;
+    while(1)
+    {
+        int num;
+        cin >> num;
+        number.push_back(num);
+
+        if(num==0)
+        {
+            number.pop_back();
+            break;
+        }
+    }
+
+    for (int i = number.size()-1; i >= 0;i--)
+    {
+        cout << number[i];
+        if(i>0)
+        {
+            cout << " ";
+        }
+    }
+
+    cout << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int an[21] = {0, 0, 1, 1};
+
+    for (int i = 4; i <= 20; i++)
+    {
+        an[i] = an[i - 3] + 2 * (an[i - 2]) + an[i - 1];
+        if (n == i)
+        {
+            cout << an[i];
+            return 0;
+        }
+    }
+    cout << an[n];
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int cnt = n;
+    int first_number;
+    cin >> first_number;
+
+    if (first_number != 0)
+    {
+        if (abs(first_number) != 1 || cnt == 0)
+        {
+            cout << first_number;
+        }
+        else
+        {
+            if (first_number == -1)
+            {
+                cout << "-";
+            }
+        }
+        if (cnt > 0)
+        {
+            cout << "x";
+            if (cnt > 1)
+            {
+                cout << "^" << cnt;
+            }
+        }
+    }
+    cnt--;
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        int number;
+        cin >> number;
+        if (number == 0)
+        {
+            continue;
+        }
+
+        if (number > 0)
+        {
+            cout << "+";
+        }
+        else
+        {
+            cout << "-";
+        }
+
+        int abs_number = abs(number);
+        if (!(abs_number == 1 && cnt != 0))
+        {
+            cout << abs_number;
+        }
+
+        if (cnt > 0)
+        {
+            cout << "x";
+            if (cnt > 1)
+            {
+                cout << "^" << cnt;
+            }
+        }
+        cnt--;
+    }
+
+    cout << endl;
+    return 0;
+}
+struct Student
+{
+    string name;
+    int year;
+    int month;
+    int day;
+    int order;
+};
+
+bool comperStudent(const Student& a,const Student& b)
+{
+    if(a.year!=b.year)
+    {
+        return a.year < b.year;
+    }
+
+    if (a.month != b.month)
+    {
+        return a.month < b.month; 
+    }
+
+    if (a.day != b.day)
+    {
+        return a.day < b.day;
+    }
+
+    return a.order > b.order;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    cin.ignore();
+
+    Student student[n];
+    for (int i = 0; i < n;i++)
+    {
+        cin >> student[i].name >> student[i].year >> student[i].month >> student[i].day;
+        student[i].order = i;
+    }
+
+    sort(student, student + n, comperStudent);
+
+    for (int i = 0; i < n;i++)
+    {
+        cout << student[i].name << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    string time_str;
+    getline(cin, time_str);
+
+    int hh, mm;
+    stringstream ss(time_str);
+    char colon;
+
+    ss >> hh >> colon >> mm;
+
+    if(hh<12||(hh==12&&mm==0))
+    {
+        cout << "Only ";
+        cout << setw(2) << setfill('0') << hh << ":";
+        cout << setw(2) << setfill('0') << mm << "." << "  Too early to Dang." << endl;
+    }
+
+    if(hh==12&&mm>0)
+    {
+        cout << "Dang" << endl;
+    }
+
+    if(hh>12)
+    {
+        if(mm==0)
+        {
+            int temp = hh - 12;
+            for (int i = 0; i < temp;i++)
+            {
+                cout << "Dang";
+            }
+        }
+
+        else
+        {
+            int temp = hh - 11;
+            for (int i = 0; i < temp;i++)
+            {
+                cout << "Dang";
+            }
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    string sentence;
+    getline(cin, sentence);
+
+    int n = sentence.length();
+    int i = 0;
+    //cout << n;
+
+    while(i<n)
+    {
+        if(sentence[i]=='6')
+        {
+            int count_6 = 0;
+            int j = i;
+
+            while(j<n&&sentence[j]=='6')
+            {
+                count_6++;
+                j++;
+            }
+
+             if(count_6>9)
+                {
+                    cout << "27";
+                }
+
+                else if(count_6>3)
+                {
+                    cout << "9";
+                }
+
+                else
+                {
+                    for (int k = 0; k < count_6;k++)
+                    {
+                        cout << "6";
+                    }
+                }
+
+            i = j;
+
+        }
+
+        else
+        {
+            cout << sentence[i];
+            i++;
+        }
+
+    }
+
+    return 0;
+}
+int main()
+{
+    int n, m, k;
+    string x;
+
+    cin >> n >> x >> m >> k;
+
+    if(k == n)
+    {
+        cout << "mei you mai " << x << " de" << endl;
+    }
+    else if(k == m)
+    {
+        cout << "kan dao le mai " << x << " de" << endl;
+    }
+    else
+    {
+        cout << "wang le zhao mai " << x << " de" << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    for (int i = 0; i < n;i++)
+    {
+        string number;
+        cin >> number;
+        int temp_1 = (number[0] - '0') + (number[1] - '0') + (number[2] - '0');
+        int temp_2 = (number[3] - '0') + (number[4] - '0') + (number[5] - '0');
+
+        if(temp_1==temp_2)
+        {
+            cout << "You are lucky!" << endl;
+        }
+
+        else
+        {
+            cout << "Wish you good luck." << endl;
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    int not_age, with_age, age_1, age_2;
+    cin >> not_age >> with_age >> age_1 >> age_2;
+
+    // --- 1. 判断谁能进 ---
+    bool can_enter_1 = false;
+    bool can_enter_2 = false;
+
+    // 判断 1 号能否进入
+    if(age_1 >= not_age) {
+        // 1号自己就能进
+        can_enter_1 = true;
+    } else {
+        // 1号是小孩，需要2号陪同
+        if(age_2 >= with_age) {
+            can_enter_1 = true; // 2号可以陪同，所以1号能进
+        }
+    }
+
+    // 判断 2 号能否进入
+    if(age_2 >= not_age) {
+        // 2号自己就能进
+        can_enter_2 = true;
+    } else {
+        // 2号是小孩，需要1号陪同
+        if(age_1 >= with_age) {
+            can_enter_2 = true; // 1号可以陪同，所以2号能进
+        }
+    }
+
+    // --- 2. 输出第一行 ---
+    if(can_enter_1) {
+        cout << age_1 << "-Y ";
+    } else {
+        cout << age_1 << "-N ";
+    }
+
+    if(can_enter_2) {
+        cout << age_2 << "-Y" << endl;
+    } else {
+        cout << age_2 << "-N" << endl;
+    }
+
+    // --- 3. 分析情况并输出第二行 ---
+    if(can_enter_1 && can_enter_2) {
+        // 两人都能进
+        // 检查是否是“必须一起进”的情况 (一人是小孩，一人是成人)
+        bool is_child_1 = age_1 < not_age;
+        bool is_adult_2 = age_2 >= with_age;
+        bool is_child_2 = age_2 < not_age;
+        bool is_adult_1 = age_1 >= with_age;
+
+        if( (is_child_1 && is_adult_2) || (is_child_2 && is_adult_1) ) {
+            // 是“必须一起进”的情况
+            if(is_adult_1) {
+                cout << "qing 1 zhao gu hao 2" << endl;
+            } else { // is_adult_2
+                cout << "qing 2 zhao gu hao 1" << endl;
+            }
+        } else {
+            // 不是“必须一起进”，只是普通都能进
+            cout << "huan ying ru guan" << endl;
+        }
+    } else if (!can_enter_1 && !can_enter_2) {
+        // 两人都进不去
+        cout << "zhang da zai lai ba" << endl;
+    } else {
+        // 一人能进，一人不能进
+        if(can_enter_1) {
+            cout << "1: huan ying ru guan" << endl;
+        } else { // can_enter_2
+            cout << "2: huan ying ru guan" << endl;
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    string number;
+    cin >> number;
+
+    double cnt = 0;
+    for (int i = 0; i < number.size(); i++)
+    {
+        if(number[i] == '2')
+        {
+            cnt++;
+        }
+    }
+
+    int digit_count = number.size();
+    bool is_negative = false;
+
+    if (number[0] == '-')
+    {
+        is_negative = true;
+        digit_count--;
+    }
+
+    double result = cnt / digit_count;
+
+    if(is_negative)
+    {
+        result *= 1.5;
+    }
+
+    char last_digit_char = number.back();
+    if ((last_digit_char - '0') % 2 == 0)
+    {
+        result *= 2;
+    }
+
+    printf("%.2f%%\n", result * 100);
+
+    return 0;
+}
+int main() 
+{
+    int n;
+    cin >> n;
+    
+    int temp[17] = {7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};
+    
+    int error_count = 0;
+
+    for (int i = 0; i < n; i++) 
+    {
+        long long sum = 0;
+        string id;
+        cin >> id;
+
+        bool is_valid_format = true;
+        
+        for (int j = 0; j < 17; j++) 
+        {
+            if (!isdigit(id[j])) 
+            {
+                is_valid_format = false;
+                break;
+            }
+            int now_number = id[j] - '0';
+            sum += now_number * temp[j];
+        }
+
+        if (!is_valid_format) 
+        {
+            cout << id << endl;
+            error_count++;
+            continue;
+        }
+
+        int temp_1 = sum % 11;
+        char temp_2 = id[17];
+        char check_code[11] = {'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'};
+
+        if(temp_2 == check_code[temp_1]) 
+        {
+            continue;
+        } 
+        else 
+        {
+            cout << id << endl;
+            error_count++;
+        }
+    }
+
+    if(error_count == 0) 
+    {
+        cout << "All passed" << endl;
+    }
+
+    return 0;
+}
+int main() {
+    long long n;
+    cin >> n;
+
+    int max_len = 0;     
+    int start_pos = 0;   
+
+    for (int i = 2; i <= sqrt(n); ++i) {
+        long long product = 1; 
+        int current_len = 0;   
+
+        for (int j = i; ; ++j) {
+            if (product > n / j) {
+                break;
+            }
+            
+            product *= j;
+            current_len++;
+
+            if (n % product == 0) {
+                if (current_len > max_len) {
+                    max_len = current_len;
+                    start_pos = i;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    if (max_len == 0) {
+        max_len = 1;
+        start_pos = n;
+    }
+
+    cout << max_len << endl;
+    for (int i = 0; i < max_len; ++i) {
+        cout << start_pos + i;
+        if (i < max_len - 1) {
+            cout << "*";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}
+int main()
+{
+    struct StudentInfo 
+    {
+        std::string exam_id; 
+        int test_seat;      
+    };
+
+    map<int, StudentInfo> seat_map;
+
+    int n;
+    cin >> n;
+
+    for (int i = 0; i < n;i++)
+    {
+        string id;
+        int trial_seat, test_seat;
+        cin >> id >> trial_seat >> test_seat;
+        seat_map[trial_seat] = {id, test_seat};
+    }
+
+    int M;
+    cin >> M;
+
+    for (int j = 0; j < M;j++)
+    {
+        int query_seat;
+        cin >> query_seat;
+
+        StudentInfo info = seat_map[query_seat];
+        cout << info.exam_id << " " << info.test_seat << endl;
+    }
+
+    return 0;
+}
+int main() 
+{
+    int n;
+    char c;
+    cin >> n >> c;
+
+    int total_stars_needed = 0;
+    int max_width = 1;
+    
+    while(true) 
+    {
+        int stars_in_upper_half = ((max_width + 1) / 2) * ((max_width + 1) / 2);
+        int total_for_current_size = 2 * stars_in_upper_half - 1;
+        
+        if(total_for_current_size <= n) 
+        {
+            max_width += 2;
+        } 
+        else 
+        {
+            max_width -= 2;
+            break;
+        }
+        
+        if (max_width > 1001) 
+        {
+            max_width -= 2;
+            break;
+        }
+    }
+    
+    if (n == 1) 
+    {
+        max_width = 1;
+    }
+
+    int stars_in_upper_half_final = ((max_width + 1) / 2) * ((max_width + 1) / 2);
+    int total_used = 2 * stars_in_upper_half_final - 1;
+    int remaining = n - total_used;
+
+    for (int i = max_width; i >= 1; i -= 2) 
+    {
+        for (int space = 0; space < (max_width - i) / 2; space++) 
+        {
+            cout << " ";
+        }
+        for (int star = 0; star < i; star++) 
+        {
+            cout << c;
+        }
+        cout << endl;
+    }
+
+    for (int i = 3; i <= max_width; i += 2) 
+    {
+        for (int space = 0; space < (max_width - i) / 2; space++) 
+        {
+            cout << " ";
+        }
+        for (int star = 0; star < i; star++) 
+        {
+            cout << c;
+        }
+        cout << endl;
+    }
+
+    cout << remaining << endl;
+
+    return 0;
+}
+int main()
+{
+    string number;
+    cin >> number;
+    int cnt[10] = {0};
+
+    for (int i = 0; i < number.size();i++)
+    {
+        int now_number = number[i] - '0';
+        cnt[now_number]++;
+    }
+
+    for (int j = 0; j <= 9;j++)
+    {
+        if(cnt[j]!=0)
+        {
+            cout << j << ":" << cnt[j] << endl;
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<int> number;
+    number.push_back(n);
+
+    while(n!=1)
+    {
+        if(n%2!=0)
+        {
+            n = n * 3 + 1;
+            number.push_back(n);
+        }
+
+        else
+        {
+            n = n / 2;
+            number.push_back(n);
+        }
+    }
+
+    for (int i = number.size() - 1; i >= 0; i--)
+    {
+        cout << number[i];
+
+        if(i>0)
+        {
+            cout << " ";
+        }
+    }
+
+    cout << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<int> number;
+    for (int i = 0; i < n;i++)
+    {
+        int cnt = 0;
+
+        int num;
+        cin >> num;
+        number.push_back(num);
+
+        for (int j = i - 1; j >= 0; j--)
+        {
+            if(number[j]<number[i])
+            {
+                cnt++;
+            }
+        }
+
+        cout << cnt;
+
+        if(i<n-1)
+        {
+            cout << " ";
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    long long n;
+    cin >> n;
+
+    long long smaller_prime_factor = -1;
+
+    for (long long i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            smaller_prime_factor = i;
+            break;
+        }
+    }
+
+    long long larger_prime_factor = n / smaller_prime_factor;
+    cout << larger_prime_factor << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    int first_number;
+    cin >> first_number;
+
+    int before_number = first_number;
+    int cnt = 1;
+    int max_cnt = 1;
+
+    if(n==1)
+    {
+        cout << cnt << endl;
+        return 0;
+    }
+
+    if(n==0)
+    {
+        cnt = 0;
+        cout << cnt << endl;
+        return 0;
+    }
+
+    for (int i = 2; i <= n;i++)
+    {
+        int number;
+        cin >> number;
+        if(number==before_number+1)
+        {
+            cnt++;
+        }
+
+        else
+        {
+            max_cnt = max(cnt, max_cnt);
+            cnt = 1;
+        }
+
+        before_number = number;
+    }
+
+    max_cnt = max(cnt, max_cnt);
+
+    cout << max_cnt << endl;
+    return 0;
+}
+int main() {
+    int n;
+    cin >> n;
+
+    if (n == 0) {
+        cout << 0 << endl;
+        return 0;
+    }
+    if (n == 1) {
+        cout << 1 << endl;
+        return 0;
+    }
+
+    int cnt = 1;
+    int max_num = 1;
+    int first_number;
+    cin >> first_number;
+    int prev_number = first_number;
+
+    for (int i = 2; i <= n; i++) {
+        int number;
+        cin >> number;
+
+        if (number == prev_number + 1) {
+            cnt++;
+        } else {
+            max_num = max(max_num, cnt);
+            cnt = 1;
+        }
+
+        prev_number = number;
+    }
+
+    max_num = max(max_num, cnt);
+
+    cout << max_num << endl;
+    return 0;
+}
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    for (int i = 1; i <= 2*n+1; i++)
+    {
+        for (int j = 1; j <= 2*m+1; j++)
+        {
+            if(i%2!=0)
+            {
+                if(j%2!=0)
+                {    
+                    cout << "+";
+                }
+                else
+                {
+                    cout << "-";
+                }
+                
+            }
+
+            else
+            {
+               if(j%2!=0)
+                {    
+                    cout << "|";
+                }
+                else
+                {
+                    cout << " ";
+                } 
+            }
+
+           
+        }
+
+         cout << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int n, k;
+    cin >> n >> k;
+    int max_temp = -1;
+    for (int i = 0; i < n;i++)
+    {
+        int number;
+        cin >> number;
+        if(number>max_temp)
+        {
+            max_temp = max(number, max_temp);
+        }
+
+        if(i==n-1&&max_temp!=k)
+        {
+            max_temp = number;
+        }
+    }
+
+    cout << max_temp << endl;
+    return 0;
+}
+int main()
+{
+    int a, b;
+    cin >> a >> b;
+    if(a<4&&b==1)
+    {
+        cout << "Yes" << endl;
+    }
+
+    else
+        cout << "No" << endl;
+
+    return 0;
+}
+int main()
+{
+    int n, a, b, c, d;
+    cin >> n >> a >> b >> c >> d;
+    int e = n - a - b - c - d;
+    cout << e << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n;i++)
+    {
+        int sum = 0;
+        string num;
+        cin >> num;
+        for (int j = 0; j < num.length();j++)
+        {
+            int temp_1 = num[j] - '0';
+            sum += (int)(pow(temp_1, num.length()) + 0.5);
+        }
+
+        int temp_2 = stoi(num);
+        if(sum==temp_2)
+        {
+            cout << "T"<<endl;
+        }
+        else
+            cout << "F" << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int cnt = 0;
+    int a, b;
+    cin >> a >> b;
+    for (int i = a; i <= b;i++)
+    {
+        bool isPrime = true;
+        if(i<2)
+        {
+            isPrime = false;
+        }
+
+        for (int j = 2; j <= sqrt(i);j++)
+        {
+            if(i%j==0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+
+            if (isPrime) 
+            {
+                cnt++;
+            }
+
+    
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+ {
+    int n;
+    cin >> n;
+
+    int count = 0;
+    for (int a = 1; a <= n;a++)
+    {
+        for(int b = a; b <= n;b++)
+        {
+            long long sum = a*a + b*b;
+            long long c = sqrt(sum);
+
+            if (c * c == sum && c <= n) 
+            {
+            count++;
+            }
+
+            if (a*a + b*b > n*n) 
+            break;    
+        }
+    }
+
+    cout << count << endl;
+    return 0;
+ }
+ int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < n;j++)
+        {
+            cout << char((i + j) % 26 + 'A');
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    long long sum = 0;
+
+    int cnt = 0;
+    for (int i = 2;i<=n;i++)
+    {
+
+        int sign = 0;
+        if (i==1)
+        {
+            continue;
+        }
+        
+        for (int k = 2; k <= sqrt(i);k++)
+        {
+
+            if (i % k != 0)
+            {
+                continue;
+            }
+            else
+            {
+                sign = 1;
+                break;
+            }
+
+
+            
+        }
+
+
+        if(sign==0)
+        {
+            if(sum+i>n)
+            {
+                break;
+            }
+            sum += i;
+            cout << i << endl;
+            cnt++;
+        }
+
+
+        if (sign==1)
+        {
+            continue;
+        }
+
+        
+        
+    }
+
+    cout << cnt << endl;
+
+    return 0;
+}
+int main()
+{
+    vector<int> number;
+    for (int i = 0; i < 3;i++)
+    {
+        int num;
+        cin >> num;
+        number.push_back(num);
+    }
+
+    sort(number.begin(), number.end());
+    int a = number[0];
+    int b = number[1];
+    int c = number[2];
+
+    int common = __gcd(a, c);
+
+    cout << a / common << "/" << c / common << endl;
+
+    return 0;
+}
+int main()
+{
+    int weekday;
+    cin >> weekday;
+    int days;
+    cin >> days;
+
+    int total_weeks = days / 7;
+
+    long long first_part = total_weeks * 5 * 250;
+
+    int remaining_days = days % 7;
+    long long second_part = 0;
+
+    for (int i = 0; i < remaining_days;i++)
+    {
+       
+        if(weekday==8)
+        {
+            weekday = 1;
+        }
+        if(weekday==6||weekday==7)
+        {
+           second_part += 0;
+        }
+        else
+        {
+            second_part += 250;
+        }
+
+        weekday++;
+    }
+
+    long long total = first_part + second_part;
+
+    cout << total << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    bool found = false;
+    // 循环 i 从 1 开始，直到 i*i*i 大于 n
+    // 为了防止 i*i*i 溢出，我们用 long long 来存储立方值
+    for (long long i = 1; i * i * i <= n; ++i) 
+    {
+        if (i * i * i == n) 
+        {
+            found = true;
+            break; // 找到了就可以退出循环了
+        }
+    }
+
+    if (found) {
+        cout << "Yes" << endl;
+    } else {
+        cout << "No" << endl;
+    }
+
+    
+    return 0;
+}
+int main()
+{
+    int h, m, s;
+    cin >> h >> m >> s; // 读取起始时间
+    
+    int k;
+    cin >> k; // 读取学习秒数
+
+    // 1. 将起始时间转换为从 00:00:00 开始的总秒数
+    long long start_seconds = (long long)h * 3600 + m * 60 + s;
+
+    // 2. 加上学了 k 秒
+    long long end_total_seconds = start_seconds + k;
+
+    // 3. 将总秒数转换回时、分、秒
+    int final_hour = end_total_seconds / 3600;
+    
+    int remaining_after_hour = end_total_seconds % 3600; // 计算剩余的秒数（不够一小时）
+    int final_minute = remaining_after_hour / 60;
+    int final_second = remaining_after_hour % 60;
+
+    // 4. 输出结果
+    cout << final_hour << " " << final_minute << " " << final_second << endl;
+
+    return 0;
+}
+int main()
+{
+    int m;
+    cin >> m;
+
+    int books_count = m / 13;  // 计算可以买的本数
+    int remaining_money = m % 13; // 计算剩余的钱
+
+    cout << books_count << endl;   // 输出本数
+    cout << remaining_money << endl; // 输出剩余金额
+
+    return 0;
+}
+int main()
+{
+    int N, M;
+    cin >> N >> M;
+    for (int i = 1; i <= N;i++)
+    {
+        if(i%M==0)
+        {continue;}
+        cout << i << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int weenkday, n;
+    cin >> weenkday >> n;
+
+    int result = (weenkday + n % 7);
+    if(result<=7)
+    {
+        cout << result << endl;
+    }
+
+    else
+    {
+        cout << result - 7 << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    int k, L, R;
+    cin >> k >> L >> R;
+
+    int sum = 0;
+    for (int i = L; i <= R;i++)
+    {
+        if(i%k==0||i%10==k)
+        {
+            sum += i;
+        }
+    }
+
+    cout << sum << endl;
+    return 0;
+}
+int main()
+{
+    int h1, m1, h2, m2;
+    cin >> h1 >> m1 >> h2 >> m2;
+
+    int sum_1 = h1 * 60 + m1;
+    int sum_2 = h2 * 60 + m2;
+    int result = sum_2 - sum_1;
+
+    cout << result << endl;
+    return 0;
+}
+int main()
+{
+    int YY, mm;
+    cin >> YY >> mm;
+    if((YY%400==0)||(YY%4==0&&YY%100!=0))
+    {
+        if(mm==1||mm==3||mm==5||mm==7||mm==8||mm==10||mm==12)
+        {
+            cout << "31" << endl;
+        }
+        else if(mm==2)
+        {
+            cout << "29" << endl;
+        }
+        else
+        {
+            cout << "30" << endl;
+        }
+    }
+
+    else
+    {
+        if(mm==1||mm==3||mm==5||mm==7||mm==8||mm==10||mm==12)
+        {
+            cout << "31" << endl;
+        }
+        else if(mm==2)
+        {
+            cout << "28" << endl;
+        }
+        else
+        {
+            cout << "30" << endl;
+
+
+
+
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    int A;
+    cin >> A;
+    int cnt = 0;
+    for (int i = 1; i <= sqrt(A);i++)
+    {
+        if(A%i==0)
+        {
+            cnt++;
+        }
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n;i++)
+    {
+        if(n%i==0)
+        {
+            cout << i << endl;
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    int x, y, z;
+    cin >> x >> y >> z;
+    int money;
+    cin >> money;
+    int total = x * 2 + y * 5 + z * 3;
+    if(money>total)
+    {
+        cout << "Yes" << endl;
+        cout << money - total << endl;
+    }
+
+    else
+    {
+        cout << "No" << endl;
+        cout << total - money << endl;
+    }
+
+    return 0;
+}
+int sum(int number)
+{
+    int sum = 0;
+    for (int i = 0; i <= number;i++)
+    {
+        sum += i;
+    }
+
+    return sum;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    long long total = 0;
+    for (int i = 0; i <= n;i++)
+    {
+        total += sum(i);
+    }
+
+    cout << total << endl;
+    return 0;
+}
+int main()
+{
+    int a, b, c;
+    cin >> a >> b >> c;
+
+    // 排序，确保 a <= b <= c，方便后续判断
+    if (a > b) swap(a, b);
+    if (b > c) swap(b, c);
+    if (a > b) swap(a, b);
+
+    // 1. 判断是否能构成三角形
+    if (a + b <= c) {
+        cout << "Not triangle" << endl;
+        return 0;
+    }
+
+    // 2. 判断角的类型 (只能是其中一个)
+    if (a * a + b * b == c * c) {
+        cout << "Right triangle" << endl;
+    }
+    else if (a * a + b * b > c * c) {
+        cout << "Acute triangle" << endl;
+    }
+    else { // a*a + b*b < c*c
+        cout << "Obtuse triangle" << endl;
+    }
+
+    // 3. 判断边的类型 (可以和角的类型一起输出)
+    if (a == b || b == c || a == c) {
+        cout << "Isosceles triangle" << endl;
+    }
+    if (a == b && b == c) {
+        cout << "Equilateral triangle" << endl;
+    }
+
+    return 0;
+}
+int main()
+{
+    vector<int> number;
+    for (int i = 0; i < 3;i++)
+    {
+        int num;
+        cin >> num;
+        number.push_back(num);
+    }
+    sort(number.begin(), number.end());
+    for(int i = 0; i < 3;i++)
+    {
+        char abc;
+        cin >> abc;
+        if(abc=='A')
+        {
+            cout << number[0];
+        }
+
+        if(abc=='B')
+        {
+            cout << number[1];
+        }
+
+        if(abc=='C')
+        {
+            cout << number[2];
+        }
+
+        if(i<2)
+        {
+            cout << " ";
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    string ISBN;
+    cin >> ISBN;
+    int sum = 0;
+    int cnt = 1;
+    for(int i = 0; i < ISBN.size();i++)
+        {
+            char c = ISBN[i];
+            if(c != '-') 
+            {
+                sum += (c - '0') * cnt;
+                cnt++;
+            }
+
+            if(cnt>9)
+            {
+                break;
+            }
+        }
+
+    int temp = sum % 11;
+    char calculated_check_char;
+    if(temp==10)
+    {
+        calculated_check_char = 'X';
+    }
+    else
+    {
+        calculated_check_char = '0' + temp;
+    }
+
+    char actual_check_char = ISBN.back();
+
+    if(calculated_check_char == actual_check_char) 
+    {
+        cout << "Right" << endl;
+    }
+
+    else
+    {
+        ISBN.pop_back();
+        ISBN.push_back(calculated_check_char);
+        cout << ISBN << endl;
+    }
+    
+    return 0;
+}
+int main()
+{
+    string zi;
+    getline(cin,zi);
+
+    int cnt = 0;
+    for (int i = 0; i < zi.size();i++)
+    {
+        if(zi[i]>='A'&&zi[i]<='Z')
+        {
+            cnt++;
+        }
+    }
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    int m;
+    cin >> m;
+
+    long long total=0;
+    for (int i = 0; i < m;i++)
+    {
+        string c_q;
+        long long number;
+        cin >> c_q >> number;
+
+        if(c_q=="deposit")
+        {
+            total += number;
+        }
+
+        else if(c_q=="withdraw")
+        {
+            total -= number;
+        }
+    }
+
+    cout << total << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<long long> numbers;
+    for (int i = 0; i < n;i++)
+    {
+        long long number;
+        cin >> number;
+        numbers.push_back(number);
+    }
+
+    long long max_num = numbers[0];
+    long long min_num = numbers[0];
+
+    for (int i = 0; i < n;i++)
+        {
+            max_num = max(max_num, numbers[i]);
+            min_num = min(min_num, numbers[i]);
+        }
+
+        
+    cout << max_num << " " << min_num << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<long long> numbers(n+1);
+    numbers[0] = 0;
+    numbers[1] = 1;
+
+    for (int i = 2; i <= n;i++)
+    {
+        numbers[i] = numbers[i - 1] + numbers[i - 2];
+    }
+
+    cout << numbers[n] << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    long long sum = 0;
+    cin >> n;
+    vector<int> floor;
+    set<int> differ_floor;
+
+    for (int i = 0; i < n;i++)
+    {
+        int floor_num;
+        cin >> floor_num;
+        floor.push_back(floor_num);
+    }
+
+    int max_floor = -1;
+    for (int i = 0; i < n;i++)
+    {
+        differ_floor.insert(floor[i]);
+        max_floor = max(max_floor, floor[i]);
+    }
+
+
+
+    long long up_down_time = 10 * max_floor;
+    long long people_down = n;
+    long long open_time = (long long)differ_floor.size() * 5;
+
+    sum = up_down_time + people_down + open_time;
+
+    cout << sum << endl;
+    return 0;
+
+}
+int calculateValue(const string& name)
+{
+    int number = 1;
+
+    for (int i = 0; i < name.size();i++)
+    {
+        int temp = name[i] - 'A' + 1;
+        number = (number * temp) % 47;
+    }
+
+    return number;
+}
+
+int main()
+{
+    string star, Duiwu;
+    cin >> star >> Duiwu;
+
+    int star_num = calculateValue(star);
+    int Duiwu_num = calculateValue(Duiwu);
+
+    if(star_num==Duiwu_num)
+    {
+        cout << "GO" << endl;
+    }
+
+    else
+        cout << "STAY" << endl;
+
+    return 0;
+}
+int countTwosInNumber(int num) 
+{
+    string s = to_string(num);
+
+    int count = 0;
+
+    for (int i = 0; i < s.length(); i++) 
+    { 
+        if (s[i]=='2') 
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main()
+{
+    int L, R;
+    cin >> L >> R;
+
+    int total = 0;
+
+    for (int i = L; i <= R;i++)
+    {
+        total += countTwosInNumber(i);
+    }
+
+    cout << total << endl;
+
+    return 0;
+}
+int main()
+{
+    int n, k;
+    cin >> n >> k;
+    set<int> numbers;
+    for (int i = 0; i < n;i++)
+    {
+        int num;
+        cin >> num;
+        numbers.insert(num);
+    }
+
+    if(numbers.size()<k)
+    {
+        cout << "NO RESULT" << endl;
+        return 0;
+    }
+
+    set<int>::iterator it= numbers.begin();
+    for (int m = 0; m < k-1;m++)
+    {
+        it++;
+    }
+
+    cout << *it << endl;
+    
+    return 0;
+}
+int main()
+{
+    int number;
+    cin >> number;
+    int sign = 1;
+    if (number<0)
+    {
+        number *= -1;
+        sign = -1;
+    }
+    
+    string number_new = to_string(number);
+
+    reverse(number_new.begin(), number_new.end());
+
+    while(number_new.length()>1&&number_new[0]=='0')
+    {
+        number_new.erase(0, 1);
+    }
+
+    int final_number = stoi(number_new) * sign;
+
+    cout << final_number;
+
+    cout << endl;
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+    long long sum = 0;
+    for (int i = 0; i < n;i++)
+    {
+        long long number;
+        cin >> number;
+        sum += number;
+    }
+
+    cout << sum << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> num;
+    for (int i = 0; i < n;i++)
+    {
+        int number;
+        cin >> number;
+        num.push_back(number);
+    }
+
+    sort(num.begin(), num.end());
+
+    for (int m = 0; m < n;m++)
+    {
+        cout << num[m];
+        if (m<n-1)
+        {
+            cout << " ";
+        }
+        
+    }
+
+    cout << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    
+    for (int i = 0;i<n;i++)
+    {
+
+        long long number;
+        cin >> number;
+        int o = 0;
+        if (number==1)
+        {
+            cout << "No" << endl;
+            continue;
+        }
+        
+        for (int k = 2; k <= sqrt(number);k++)
+        {
+            if (number % k != 0)
+            {
+                continue;
+            }
+            else
+            {
+                o = 1;
+                break;
+            }
+            
+        }
+
+        if(o==0)
+        {
+            cout << "Yes" << endl;
+        }
+
+        if (o==1)
+        {
+            cout << "No" << endl;
+        }
+        
+    }
+
+    return 0;
+}
+int main() {
+    // 定义一个数组，将数字 0-9 映射到对应的拼音
+    // pinyin[0] = "ling", pinyin[1] = "yi", ...
+    string pinyin[10] = {"ling", "yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu"};
+    
+    string num_str;
+    cin >> num_str; // 直接以字符串形式读入，方便处理符号和每一位
+
+    // 用于控制输出空格的标志
+    bool is_first = true;
+
+    // 遍历字符串中的每一个字符
+    for (int i = 0; i < num_str.length(); ++i) 
+    {
+        char c = num_str[i];
+        
+        // 如果是负号，输出 "fu"
+        if (c == '-') 
+        {
+            cout << "fu";
+            is_first = false; // 负号也算第一个输出的部分
+            continue; // 跳过本次循环，继续处理下一个字符
+        }
+
+        // 将字符转换为整数
+        int digit = c - '0';
+
+        // 输出空格（如果这不是第一个要输出的拼音）
+        if (!is_first) 
+        {
+            cout << " ";
+        }
+        is_first = false;
+
+        // 输出对应的拼音
+        cout << pinyin[digit];
+    }
+
+    // 最后输出一个换行符
+    cout << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<int> odds;
+    vector<int> evens;
+
+    for (int i = 0; i < n;i++)
+    {
+        int number;
+        cin >> number;
+
+        if (number%2==1)
+        {
+            odds.push_back(number);
+        }
+        else
+        {
+            evens.push_back(number);
+        }
+        
+    }
+
+    for (int i = 0; i < odds.size(); ++i)
+    {
+        cout << odds[i];
+        if (i!=odds.size()-1)
+        {
+            cout << " ";
+        } 
+    }
+
+    cout << endl;
+
+    
+    for (int i = 0; i < evens.size(); ++i)
+    {
+        cout << evens[i];
+        if (i!=evens.size()-1)
+        {
+            cout << " ";
+        } 
+    }
+
+    cout << endl;
+
+    return 0;
+}
+int main()
+{
+    int n;
+    long long R;
+    cin >> n >> R;
+
+    long long max_cuteness = -1;
+
+    for (int i = 0; i < n; i++)
+    {
+        long long k, p;
+        cin >> k >> p;
+
+        if (p<=R)
+        {
+            max_cuteness = max(max_cuteness, k);
+        }
+        
+    }
+
+    cout << max_cuteness << endl;
+
+    return 0;
+}
+int main()
+{
+    long long n, k;
+    cin >> n >> k;
+    vector<long long> a(n + 1);
+
+    long long sum = 0;
+
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> a[i];
+        sum = sum + a[i];
+    }
+
+    long long change = -2 * a[k];
+
+    long long sum_new = sum + change;
+
+    cout << sum_new << endl;
+
+    return 0;
+}
+int main()
+{
+    string s;
+    cin >> s;
+    for (int i = s.length()-1; i >= 0; i--)
+    {
+        cout << s[i];
+    }
+
+    return 0;
+}
+int main()
+{
+    char c;
+    cin >> c;
+    int height = 3;
+
+    for (int i = 1; i <= 3; i++)
+    {
+        for (int j = 0; j < height - i; j++)
+        {
+            cout << " ";
+        }
+
+         for (int k = 0; k < 2*i-1; k++)
+        {
+            cout << c;
+        }
+
+        cout << endl;
+    }
+
+   
+    return 0;
+}
+int main()
+{
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << setw(8) << a;
+    cout << " ";
+    cout << setw(8) << b;
+    cout << " ";
+    cout << setw(8) << c;
+    return 0;
+}
+int main()
+{
+    double a, b, c;
+    cin >> a >> b >> c;
+    double p = 0.5 * (a + b + c);
+    double S = sqrt(p * (p - a) * (p - c) * (p - b));
+    printf("%.1lf", S);
+
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int n, k;
+    cin >> n >> k;
+
+    //特判"1"!!!!!!!!
+    if (k == 1) {
+        cout << n << endl;  
+        return 0;
+    }
+
+    int cnt = 0;
+    while (n!=0)
+    {
+        
+        if (n % k != 0) 
+        {
+            cnt += n % k;  
+            n -= n % k;    
+        }
+        
+        else 
+        {
+            n /= k;
+            cnt++;
+        }
+    }
+    cnt += n;
+
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    long long n, m;
+    cin >> n >> m;
+
+    long long result = 0;
+    while(m--&&n>=3)
+    {
+        int temp = n / 3;
+        result += temp;
+        n -= temp;
+       
+    }
+
+    cout << result << endl;
+    return 0;
+}
