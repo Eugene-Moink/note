@@ -6953,3 +6953,112 @@ int main()
     }
     return 0;
 }
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        vector<pair<int, string>> book;
+        int best11 = INT_MAX, best10 = INT_MAX, best01 = INT_MAX;
+        for (int i = 0; i < n;i++)
+        {
+            int num;
+            string str;
+            cin >> num >> str;
+            book.push_back({num, str});
+        }
+
+        for (int i = 0; i < n;i++)
+        {
+            if(book[i].second=="11")
+            {
+                best11 = min(best11, book[i].first);
+            }
+
+            if(book[i].second=="10")
+            {
+                best10 = min(best10, book[i].first);
+            }
+
+            if(book[i].second=="01")
+            {
+                best01 = min(best01, book[i].first);
+            }
+        }
+
+        int ans = INT_MAX;
+
+        if (best11 != INT_MAX) 
+            ans = min(ans, best11);
+
+        if (best10 != INT_MAX && best01 != INT_MAX) 
+            ans = min(ans, best10 + best01);
+
+        if (ans == INT_MAX) 
+            cout << -1 << endl;
+
+        else    
+            cout << ans << endl;
+    }
+    return 0;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, p;
+    cin >> n >> p;
+    vector<int> gpa(n + 1);
+    vector<long long> d(n + 2, 0);
+
+    for (int i = 1; i <= n;i++)
+    {
+        cin >> gpa[i];
+    }
+
+    while(p--)
+    {
+        int x, y, z;
+        cin >> x >> y >> z;
+        d[x] += z;
+        d[y + 1] -= z;
+    }
+
+    ll add = 0;
+    ll result = LLONG_MAX;
+
+    for (int i = 1; i <= n;i++) 
+    {
+        add += d[i];
+        ll cur = gpa[i] + add;
+        result = min(result, cur);
+    }
+    cout << result << endl;
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<long long> d(1005, 0); 
+    for (int i = 0; i < n; i++)
+    {
+        int s, t, b;
+        cin >> s >> t >> b;
+        d[s] += b;
+        d[t] -= b;
+    }
+
+    long long cur = 0, ans = 0;
+    for (int time = 1; time <= 1000; time++) 
+    {
+        cur += d[time];
+        ans = max(ans, cur);
+    }
+
+    cout << ans << endl;
+}
