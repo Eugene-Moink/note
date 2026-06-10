@@ -7062,3 +7062,152 @@ int main()
 
     cout << ans << endl;
 }
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        if(a+b==c)
+        {
+            cout << "+" << endl;
+        }
+
+        else
+        {
+            cout << "-" << endl;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        ll odd = 0;
+        ll even = 0;
+
+        for (int i = 1; i <= n;i++)
+        {
+            ll num;
+            cin >> num;
+            if(num%2==0)
+            {
+                even += num;
+            }
+            else
+            {
+                odd += num;
+            }
+        }
+        if(even>odd)
+        {
+            cout << "yes" << endl;
+        }
+        else
+        {
+            cout << "no" << endl;
+        }
+    }
+    return 0;
+}
+ll countBlue(const string& pattern, ll pos)
+{
+    ll len = pattern.size();
+    ll full = pos / len;
+    ll rem = pos % len;
+
+    ll cntB = 0;
+    for (int i = 0; i < pattern.size();i++)
+    {
+        if(pattern[i]=='B')
+        {
+            cntB++;
+        }
+    }
+
+    ll extra = 0;
+    for (int i = 0; i <= rem - 1;i++)
+    {
+        if(pattern[i]=='B')
+        {
+            extra++;
+        }
+    }
+
+    return full * cntB + extra;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+    ll cnt = 0;
+    while(t--)
+    {
+        cnt++;
+        string s;
+        cin >> s;
+        ll i, j;
+        cin >> i >> j;
+
+        ll result = countBlue(s, j) - countBlue(s, i - 1);
+
+        cout << "Case #" << cnt << ": " << result << endl;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<ll> diff(n + 2, 0);
+
+    for (int i = 0; i < n;i++)
+    {
+        ll a, b;
+        cin >> a >> b;
+        diff[a] += 1;
+        diff[b + 1] -= 1;
+    }
+
+    ll ans = -1;
+    ll cur = 0;
+    for (int k = 0; k <= n; k++) 
+    {
+        cur += diff[k];
+        if (cur == k) 
+        {
+            ans = k; 
+        }
+    }
+    cout << ans << endl;
+    return 0;
+}            
+________________________________________________________________________
+int main()
+{
+    int n;
+    cin >> n;
+
+    string A;
+    cin >> A;
+
+    string B;
+    cin >> B;
+
+    int ans = 0;
+    for (int i = 0; i < n;i++)
+    {
+        if (A[i] != B[i] && (i == 0 || A[i-1] == B[i-1]))
+        ans++;
+    }
+    cout << ans << endl;
+    return 0;
+}
