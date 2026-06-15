@@ -7388,3 +7388,174 @@ int main()
         cout << (poss ? "YES" : "NO") << endl;
     }
 }
+int main()
+{
+    ll t;
+    cin >> t;
+    while(t--)
+    {
+        ll n;
+        cin >> n;
+        vector<ll> p(n);
+        for (int i = 0; i < n;i++)
+        {
+            cin >> p[i];
+        }
+
+        for (int i=0; i<n; ++i) 
+        {
+            if (i) cout << ' ';
+            cout << n+1-p[i];
+        }
+        cout << endl;
+    }
+    return 0;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    ll t;
+    cin >> t;
+    while(t--)
+    {
+        ll b, a;  
+        cin >> b >> a;
+        
+        ll sol = -1;
+        
+       
+        if ((a + b) % 2 == 0) 
+        {
+            sol = a + b;
+        }
+        
+        if (a % 2 == 1 && b % 2 == 1) 
+        {
+            sol = max(sol, a * b + 1);
+        }
+        
+        else if (a % 2 == 0 && (a % 4 == 0 || b % 2 == 0)) 
+        {
+            sol = max(sol, 2 + (a * b) / 2);
+        }
+        
+        cout << sol << endl;
+    }
+    return 0;
+}
+________________________________________________________________________
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+        ll n;
+        cin>>n;
+        set<ll> arr;
+        
+        for (int i = 0; i < n;i++)
+        {
+            ll num;
+            cin >> num;
+            arr.insert(num);
+        }
+
+        if(arr.size()==n)
+        {
+            cout << "YES" << endl;
+        }
+        else{
+            cout << "NO" << endl;
+        }
+   }
+   return 0;
+}
+int main()
+{
+    ll n;
+    cin >> n;
+
+    ll left = 1, right = 1e6;
+    ll ans = 0;
+    while(left<=right)
+    {
+        ll mid = left + (right - left) / 2;
+
+        if(mid*mid*mid<=n)
+        {
+            ans = mid;
+            left = mid + 1;
+        }
+
+        else
+        {
+            right = mid - 1;
+        }
+    }
+
+    cout << ans << endl;
+    return 0;
+}
+ll read(){
+	ll x=0,f=1;
+	char c=getchar();
+	while(c<'0'||c>'9'){
+		if(c=='-') f=-1;
+		c=getchar();
+	}
+	while(c>='0'&&c<='9'){
+		x=x*10+c-'0';
+		c=getchar();
+	}
+	return x*f;
+}
+
+ll lower_bound(vector<ll>& arr, ll target) 
+{
+    ll left = 0, right = arr.size();  
+    while (left < right) 
+    {
+        ll mid = left + (right - left) / 2;
+        if (arr[mid] < target)
+        {
+            left = mid + 1;
+        } 
+        else 
+        {
+            right = mid;  
+        }
+    }
+        
+        if (left < arr.size() && arr[left] == target) 
+        {
+            return left;  
+        }
+        return -1;
+}
+
+int main() 
+{
+    ll n=read(),m=read();
+    vector<ll> arr(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+
+    sort(arr.begin(), arr.end());
+
+    while(m--)
+    {
+        ll num;
+        cin >> num;
+        ll pos = lower_bound(arr, num);
+        if (pos != -1) cout << pos + 1;
+        else cout << "-1";
+        if (m > 0) cout << " ";
+    }
+    
+    return 0;
+}
