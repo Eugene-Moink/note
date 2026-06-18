@@ -7559,3 +7559,274 @@ int main()
     
     return 0;
 }
+ll max_eat(ll x)
+{
+    ll eaten = x;
+    ll sticks = x;
+
+    while (sticks >= 3)
+    {
+        ll new_add = sticks / 3;
+        eaten += new_add;
+        sticks = sticks % 3 + new_add;
+    }
+
+    return eaten;
+}
+
+int main()
+{
+    ll n;
+    cin >> n;
+
+    ll left = 1, right = n;
+    while(left<right)
+    {
+        ll mid = left + (right - left) / 2;
+        if(max_eat(mid)>=n)
+        {
+            right = mid;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+
+    cout << left << endl;
+    return 0;
+}
+int main()
+{
+    ll a, b, h, k;
+    cin >> a >> b >> h >> k;
+
+    ll ans = ((a + k) % mod * (b + k) % mod * (h + k) % mod) % mod;
+    cout << ans << endl;
+    return 0;
+}
+ll getMaxPrimeFactor(ll x) 
+{
+    ll max_factor = 1;
+    for (int i = 2; i * i <= x; i++) 
+    {
+        while (x % i == 0) {
+            max_factor = i;
+            x /= i;
+        }
+    }
+    if (x > 1) max_factor = x;
+    return max_factor;
+}
+
+int main()
+{
+    ll m, n;
+    cin >> m >> n;
+    for (int i = m; i <= n;i++)
+    {
+        ll temp = i;
+        ll ans = getMaxPrimeFactor(temp);
+        cout << ans;
+        if(i<n)
+        {
+            cout << ",";
+        }
+    }
+
+    return 0;
+}
+int main()
+{
+    ll t;
+    cin >> t;
+    while(t--)
+    {
+        ll a, b;
+        cin >> a >> b;
+
+        bool is_farmer_turn = 1;
+
+        while (a!=0&&b!=0)
+        {
+            if(is_farmer_turn)
+            {
+                if(a<b)
+                {
+                    a++;
+                }
+
+                else
+                {
+                    a /= 2;
+                }
+            }
+
+            else
+            {
+                if(b<a)
+                {
+                    b++;
+                }
+
+                else
+                {
+                    b /= 2;
+                }
+            }
+            is_farmer_turn = !is_farmer_turn;
+        }
+
+        cout << a << " " << b << endl;
+    }
+    return 0;
+}
+int main()
+{
+    char a, b;
+    cin >> a >> b;
+    ll num = (a - 'A') + (b - 'A');
+    string ans = "";
+
+    if (num < 26)
+    {
+        ans += (char)'A' + num;
+    }
+
+    else
+    {
+        string s = "";
+        while(num > 0)
+        {
+            ll temp = num % 26;
+            if(temp == 0)
+            {
+                s += 'Z';
+                num = num / 26 - 1;
+            }
+            else
+            {
+                s += 'A' + temp - 1; 
+                num /= 26;
+            }
+        }
+        reverse(s.begin(), s.end());
+        ans = s;
+    }
+
+    cout << ans << endl;
+    return 0;
+}
+int main()
+{
+    ll n, m;
+    cin >> n >> m;
+    vector<vector<ll>> arr(n, vector<ll>(m));
+    vector<vector<ll>> new_arr(m, vector<ll>(n));
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < m;j++)
+        {
+            cin >> arr[i][j];
+        }
+    }
+
+    for (int k = 0; k < n;k++)
+    {
+        for (int l = 0; l < m;l++)
+        {
+            new_arr[l][n-1-k] = arr[k][l]; 
+        }
+    }
+
+    for (int i = 0; i < m;i++)
+    {
+        for (int j = 0; j < n;j++)
+        {
+            cout << new_arr[i][j];
+            if (j != n - 1)
+            {
+                cout << " ";
+            }
+        }
+         cout << endl;
+    }
+
+        return 0;
+}
+int main()
+{
+    ll n,x,y,a,b;
+    cin>>n>>x>>y>>a>>b;
+    ll joy = 0;           
+    ll max_joy = 0;       
+    ll consecutive_gift = 0;      
+    ll consecutive_no_gift = 0;   
+    while(n--)
+    {
+        ll S, s, M;
+        cin >> S >> s >> M;
+
+        ll gift_weight = M - (S * x + s * y);
+
+        if(gift_weight>0)
+        {
+            joy += gift_weight;
+
+            if(gift_weight>S * x + s * y)
+            {
+                joy += (ll)ceil(0.5 * gift_weight);
+            }
+
+            consecutive_gift++;
+            consecutive_no_gift = 0;
+            if(consecutive_gift>=a)
+            {
+                joy *= 2;
+            }
+
+            else
+            {
+                consecutive_no_gift++;
+                consecutive_gift = 0;
+
+                if (consecutive_no_gift >= b &&joy > 0)
+                {
+                    joy /= 2;
+                }
+            }
+        }
+        max_joy = max(max_joy, joy);
+    }
+    cout << max_joy << " " << joy << endl;
+    return 0;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    string s;
+    cin >> s;
+
+    ll result = 0;
+    int n = s.length();
+    ll current_number = 0;
+    int sign = 1;
+
+    for (int i = 0; i < n; ++i) {
+        char c = s[i];
+        if (isdigit(c)) {
+            current_number = current_number * 10 + (c - '0');
+        } else { 
+            result += sign * current_number;
+            sign = (c == '+') ? 1 : -1;
+            current_number = 0;
+        }
+    }
+
+    result += sign * current_number;
+
+    cout << result << endl;
+
+    return 0;
+}
