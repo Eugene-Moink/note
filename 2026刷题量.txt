@@ -7830,3 +7830,253 @@ int main() {
 
     return 0;
 }
+int main() 
+{
+    ll type, a, b, c, d;
+    cin >> type >> a >> b >> c >> d;
+    if(type==0)
+    {
+        cout << a + b<<endl;
+    }
+
+    else
+    {
+        cout << max(a - c, (ll)0) + max(b - d, (ll)0) << endl;
+    }
+    return 0;
+}
+int main() 
+{
+    string s;
+    cin >> s;
+
+    
+    if (s.size() >= 3 && s.substr(s.size()-3, 3) == "ing") 
+    {
+        s = s.substr(0, s.size()-3);
+    }
+    
+    else if (s.size() >= 2 && s.substr(s.size()-2, 2) == "er") 
+    {
+        s = s.substr(0, s.size()-2);
+    }
+    
+    else if (s.size() >= 2 && s.substr(s.size()-2, 2) == "ly") 
+    {
+        s = s.substr(0, s.size()-2);
+    }
+    cout << s << endl;
+    return 0;
+}
+int main() 
+{
+    int n;
+    char B;
+    cin >> n >> B;
+    
+    int total = 0;
+    for(int i = 0; i < 4 * n; i++) 
+    {
+        string s;
+        cin >> s;
+        char card = s[0];  
+        char suit = s[1];  
+        
+        if(suit == B) 
+        {
+            switch(card) {
+                case 'A': total += 11; break;
+                case 'K': total += 4; break;
+                case 'Q': total += 3; break;
+                case 'J': total += 20; break;
+                case 'T': total += 10; break;
+                case '9': total += 14; break;
+                case '8': total += 0; break;
+                case '7': total += 0; break;
+            }
+        }
+        else 
+        {
+            switch(card) {
+                case 'A': total += 11; break;
+                case 'K': total += 4; break;
+                case 'Q': total += 3; break;
+                case 'J': total += 2; break; 
+                case 'T': total += 10; break;
+                case '9': total += 0; break;  
+                case '8': total += 0; break;
+                case '7': total += 0; break;
+            }
+        }
+    }
+    
+    cout << total << endl;
+    return 0;
+}
+int main()
+{
+    ll n;
+    cin >> n;
+    vector<ll> arr(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> arr[i];
+    }
+
+    sort(arr.begin(), arr.end());
+
+    if (n < 2) 
+    {
+        cout << 0 << endl;
+        return 0;
+    }
+
+    ll mid = n / 2;
+    ll l = 0;
+    ll r = 1;
+    ll group = 0;
+
+    while (l < mid && r < n)
+    {
+        if(l>=r)
+        {
+            r = l + 1;
+            continue;
+        }
+
+        if(arr[r]>=2*arr[l])
+        {
+            group++;
+            l++;
+            r++;
+        }
+        else
+        {
+            r++;
+        }
+       
+    }
+    
+
+    cout << group << endl;
+    return 0;
+}
+struct student
+{
+    ll chinese;
+    ll math;
+    ll english;
+    ll total;
+};
+
+int main()
+{
+    ll n;
+    cin >> n;
+    vector<student> st(n);
+
+    ll cnt = 0;
+    for (int i = 0; i < n;i++)
+    {
+        cin >> st[i].chinese >> st[i].math >> st[i].english;
+
+        st[i].total = st[i].chinese + st[i].math + st[i].english;
+    }
+
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = i + 1; j < n;j++)
+        {
+            if (abs(st[i].chinese - st[j].chinese) <= 5 &&
+                    abs(st[i].math - st[j].math) <= 5 &&
+                    abs(st[i].english - st[j].english) <= 5 &&
+                    abs(st[i].total - st[j].total) <= 10)
+            {
+                cnt++;
+            }
+        }
+    }
+    cout << cnt << endl;
+    return 0;
+}
+int main()
+{
+    ll a, b, c;
+    cin >> a >> b >> c;
+
+    ll d, e, f;
+    cin >> d >> e >> f;
+
+    ll k;
+    cin >> k;
+
+    ll num_1 = k / b * c * a;
+    ll num_2 = k / e * f * d;
+
+    ll ans = max(num_1, num_2);
+    cout << ans << endl;
+    return 0;
+}
+int main()
+{
+    ll t;
+    cin >> t;
+    while(t--)
+    {
+        ll n, x, a, b;
+        cin >> n >> x >> a >> b;
+        ll ans = x * b + (n - x) * a;
+        cout << ans << endl;
+    }
+    return 0;
+}
+bool find_word(const string &s)
+{
+    for (size_t i = 0; i + 3 < s.size();++i)
+    {
+        if ((tolower(static_cast<unsigned char>(s[i]))   == 'r' &&
+            tolower(static_cast<unsigned char>(s[i+1])) == 'i' &&
+            tolower(static_cast<unsigned char>(s[i+2])) == 'o' &&
+            tolower(static_cast<unsigned char>(s[i+3])) == 'i'))
+            {
+                return true;
+            }
+    }
+    return false;
+}
+
+int main()
+{
+    string s;
+    cin >> s;
+    string t;
+    cin >> t;
+
+    bool ans_s = find_word(s);
+    bool ans_t = find_word(t);
+
+    if(ans_s&&ans_t)
+    {
+        cout << "Either is ok!" << endl;
+    }
+
+    else if(ans_s||ans_t)
+    {
+        if(ans_s)
+        {
+            cout << s << " for sure!" << endl;
+        }
+
+        if(ans_t)
+        {
+            cout << t << " for sure!" << endl;
+        }
+    }
+
+    else
+    {
+        cout << "Try again!" << endl;
+    }
+
+    return 0;
+}
