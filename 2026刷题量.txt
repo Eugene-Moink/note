@@ -5601,7 +5601,7 @@ int main() {
     
     return 0;
 }
-________________________________________________________________________
+ 
 int main()
 {
     int k;
@@ -6117,7 +6117,7 @@ int main()
     cout << result;
     return 0;
 }
-________________________________________________________________________
+ 
 int main()
 {
     string s;
@@ -6901,7 +6901,7 @@ int main()
     }
     return 0;
 }
-________________________________________________________________________
+ 
 int main()
 {
     int t;
@@ -7190,7 +7190,7 @@ int main()
     cout << ans << endl;
     return 0;
 }            
-________________________________________________________________________
+ 
 int main()
 {
     int n;
@@ -7445,7 +7445,7 @@ int main()
     }
     return 0;
 }
-________________________________________________________________________
+ 
 int main()
 {
    int t;
@@ -8080,7 +8080,7 @@ int main()
 
     return 0;
 }
-________________________________________________________________________
+ 
 bool is_good(ll num)
 {
     string s = to_string(num);
@@ -8134,7 +8134,7 @@ int main()
     cout << result << endl;
     return 0;
 }
-________________________________________________________________________
+ 
 int main()
 {
     ll t;
@@ -9458,7 +9458,7 @@ int main()
     }
     return 0;
 }
-________________________________________________________________________
+ 
 void moink()
 {
     ll n, k;
@@ -10948,7 +10948,7 @@ void moink()
     }
     cout << ans << endl;
 }
-________________________________________________________________________
+++++++++++++++++++++++
 void moink()
 {
     ll n;
@@ -11247,4 +11247,2548 @@ void moink()
         }
         cout << endl;
     }
+}
+const ll mod=998244353;
+const int maxn = 1000005;
+ll pow10[maxn];
+void moink()
+{
+    int n;
+    cin >> n;
+    
+    if(n==0)
+    {
+        cout << 0 << endl;
+        return;
+    }
+
+    ll ans = (ll)n * pow10[n - 1] % mod;
+    cout << ans << endl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    pow10[0] = 1;
+    for (ll i = 1; i < maxn;i++)
+    {
+        pow10[i] = pow10[i - 1] * 10 % mod;
+    }
+
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        moink();
+    }
+    return 0;
+}
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> result(n);
+    int shift = min(m, n / 2);
+    for (int i = 0; i < n;i++)
+    {
+        result[i] = (i + shift) % n + 1;
+    }
+
+    for(int a  : result)
+    {
+        cout << a << " ";
+    }
+}
+void moink()
+{
+    int k1, b1, k2, b2, c;
+    cin >> k1 >> b1 >> k2 >> b2 >> c;
+    double x1 = (double)(c - b1) / k1;
+    double x2 = (double)(c - b2) / k2;
+    double dist = fabs(x1 - x2);
+    cout << fixed << setprecision(10) << dist;
+}
+void moink()
+{
+    int n, m, k;
+    cin >> n >> m >> k;
+    vector<int> need(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> need[i];
+    }
+    sort(need.begin(), need.end());
+
+    int ans = 0;
+    for (int i = 0; i < n;i++)
+    {
+        if (m >= need[i])
+        {
+            ans++;
+            m -= need[i];
+        }
+
+        else if (k > 0)
+        {
+            ans++;
+            k--;
+        }
+
+        else
+        {
+            break;
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    int pre_t = 0, pre_x = 0, pre_y = 0;
+    for (int i = 0; i < n;i++)
+    {
+        int cur_t, cur_x, cur_y;
+        cin >> cur_t >> cur_x >> cur_y;
+
+        int dt = cur_t - pre_t;
+        int dist = abs(cur_x - pre_x) + abs(cur_y - pre_y);
+
+        if (dist > dt || (dt - dist) % 2 != 0)
+        {
+            cout << "No" << endl;
+            return;
+        }
+        pre_t = cur_t;
+        pre_x = cur_x;
+        pre_y = cur_y;
+    }
+    cout << "Yes" << endl;
+}
+void moink()
+{
+    int h, w;
+    cin >> h >> w;
+    vector<vector<char>> grid(h, vector<char>(w));
+    for (int i = 0; i < h;i++)
+    {
+        for (int j = 0; j < w; j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    for (int i = 0; i < h; i++)
+    {
+        for (int j = 0; j < w;j++)
+        {
+            if(grid[i][j] == '#')
+            {
+                bool ok = 0;
+                if (i > 0 && grid[i - 1][j] == '#')
+                {
+                    ok = 1;
+                }
+                if (i < h - 1 && grid[i + 1][j] == '#')
+                {
+                    ok = 1;
+                }
+                if(j > 0 && grid[i][j - 1] == '#')
+                {
+                    ok = 1;
+                }
+                if(j < w - 1 && grid[i][j + 1] == '#')
+                {
+                    ok = 1;
+                }
+                if(!ok)
+                {
+                    cout << "No" << endl;
+                    return;
+                }
+            }
+        }
+    }
+    cout << "Yes" << endl;
+}
+void moink()
+{
+    string s;
+    cin >> s;
+    string target = "keyence";
+    int n = s.size();
+
+    int left = 0;
+    while(left < n && left < 7 && s[left] == target[left])
+    {
+        left++;
+    }
+    int right = 0;
+    while(right < n && right < 7 && s[n - 1 - right] == target[6 - right])
+    {
+        right++;
+    }
+    if (left + right >= 7)
+    {
+        cout << "Yes" << endl;
+    }
+    else
+    {
+        cout << "No" << endl;
+    }
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int sum = 0;
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+        sum += a[i];
+    }
+
+    if (sum % 10 != 0)
+    {
+        cout << sum << endl;
+        return;
+    }
+
+    sort(a.begin(), a.end());
+    for (int i = 0; i < n;i++)
+    {
+        if ((sum - a[i]) % 10 != 0)
+        {
+            cout << sum - a[i] << endl;
+            return;
+        }
+    }
+
+    cout << 0 << endl;
+}
+void moink()
+{
+    int n, T;
+    cin >> n >> T;
+
+    ll ans = 0;
+    int pre_t;
+    for (int i = 0; i < n;i++)
+    {
+        int cur_t;
+        cin >> cur_t;
+
+        if (i == 0)
+        {
+            ans = T;
+        }
+
+        else
+        {
+            int gap = cur_t - pre_t;
+            ans += min(gap, T);
+        }
+        pre_t = cur_t;
+    }
+    cout << ans << endl;
+}
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+void moink() 
+{
+    ll w;
+    cin >> w;
+    vector<ll> ans;
+    for (ll i = 1; i <= 99; ++i) ans.push_back(i);
+    for (ll i = 1; i <= 99; ++i) ans.push_back(i * 100);
+    for (ll i = 1; i <= 99; ++i) ans.push_back(i * 10000);
+
+    cout << ans.size() << "\n";
+    for (size_t i = 0; i < ans.size(); ++i) {
+        cout << ans[i] << " \n"[i == ans.size() - 1];
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    moink();
+    return 0;
+}
+void moink()
+{
+    string s;
+    cin >> s;
+    string ans = "";
+    while((int)ans.size() < 6) 
+    {
+        ans += s;
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int N, W;
+    cin >> N >> W;
+    vector<int> a(N);
+    for (int i = 0; i < N; i++) cin >> a[i];
+
+    vector<ll> good;
+    for (int i = 0; i < N; i++)
+    {
+        good.push_back(a[i]);
+        for (int j = i + 1; j < N; j++)
+        {
+            good.push_back((ll)a[i] + a[j]);
+            for (int k = j + 1; k < N; k++)
+            {
+                good.push_back((ll)a[i] + a[j] + a[k]);
+            }
+        }
+    }
+
+    sort(good.begin(), good.end());
+    good.erase(unique(good.begin(), good.end()), good.end());
+
+    ll ans = upper_bound(good.begin(), good.end(), (ll)W) - good.begin();
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+
+    int max_score = -1, ans_index = -1;
+    unordered_set<string> seen;
+    for (int i = 0; i < n;i++)
+    {
+        string cur_s;
+        int cur_t;
+        cin >> cur_s >> cur_t;
+
+        if (seen.count(cur_s) == 0)
+        {
+            seen.insert(cur_s);
+            if (cur_t > max_score)
+            {
+                max_score = cur_t;
+                ans_index = i + 1;
+            }
+        }
+    }
+    cout << ans_index << endl;
+}
+void moink()
+{
+    ll w;
+    cin >> w;
+    vector<ll> ans;
+    ans.push_back(1);
+    ans.push_back(2);
+    ans.push_back(4);
+
+    ll max_cover = 7;
+    while(max_cover<w)
+    {
+        ll nxt = max_cover + 1;
+        ans.push_back(nxt);
+        max_cover += nxt;
+    }
+    cout << ans.size() << endl;
+    for (ll x : ans)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+}
+void moink()
+{
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    ll min_val = LLONG_MAX;
+    ll sum = 0;
+    for (ll i = 0; i < n; i++) {
+        cin >> a[i];
+        sum += a[i];
+        if (a[i] < min_val) min_val = a[i];
+    }
+    cout << sum - n * min_val << endl;
+}
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+    ll ans = LLONG_MAX;
+    vector<string> s(n);
+    for (int i = 0; i < n;i++)
+        cin >> s[i];
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            ll diff = 0;
+            for (int k = 0; k < m;k++)
+            {
+                diff += abs(s[i][k] - s[j][k]);
+            }
+            ans = min(ans, diff);
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> a(n, vector<int>(m));
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < m;j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+
+    map<int, ll> diag1, diag2;
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < m; j++) 
+        {
+            diag1[i - j] += a[i][j];      
+            diag2[i + j] += a[i][j];
+        }
+    }
+
+    ll ans = 0;
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < m; j++) 
+        {
+            ll sum = diag1[i - j] + diag2[i + j] - a[i][j]; 
+            ans = max(ans, sum);
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    ll n, q;
+    cin >> n >> q;
+    vector<ll> a(n + 1);
+    vector<ll> pre(n + 1);
+
+    for (int i = 1; i <= n;i++)
+    {
+        cin >> a[i];
+    }
+    sort(a.begin() + 1, a.end(), greater<ll>());
+
+    for (int i = 1; i <= n;i++)
+    {
+        pre[i] = pre[i - 1] + a[i];
+    }
+
+    while (q--)
+    {
+        ll x;
+        cin >> x;
+        auto it = lower_bound(pre.begin() + 1, pre.end(), x);
+        if(it==pre.end())
+        {
+            cout << "-1" << endl;
+        }
+        else
+            cout << (it - pre.begin()) << endl;
+    }
+}
+void moink()
+{
+    int sc;
+    cin >> sc;
+    if(sc>=1900)
+    {
+        cout << "Division 1" << endl;
+        return;
+    }
+    else if(sc>=1600&&sc<=1899)
+    {
+        cout << "Division 2" << endl;
+        return;
+    }
+    else if(sc>=1400&&sc<=1599)
+    {
+        cout << "Division 3" << endl;
+    }
+    else
+    {
+        cout << "Division 4" << endl;
+    }
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    int l = 0, r = n - 1;
+    int sum_l = 0, sum_r = 0, ans = 0;
+    while(l<=r)
+    {
+        if(sum_l<sum_r)
+        {
+            sum_l += a[l++];
+        }
+        else if(sum_l>sum_r)
+        {
+            sum_r += a[r--];
+        }
+        else
+        {
+            ans = max(ans, l + (n - 1 - r));
+            if (l < r) 
+            {
+                sum_l += a[l++];
+            } 
+            else 
+            {
+                break;
+            }
+        }
+    }
+    if (sum_l == sum_r) 
+    {
+         ans = max(ans, l + (n - 1 - r));
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n + 1, 0);
+    for (int i = 1; i <= n;i++)
+    {
+        int num;
+        cin >> num;
+        a[num]++;
+    }
+
+    bool ok = 0;
+    for (int i = 1; i <= n;i++)
+    {
+        if(a[i]>=3)
+        {
+            ok = 1;
+            cout << i << endl;
+            break;
+        }
+    }
+    if(!ok)
+    {
+        cout << -1 << endl;
+    }
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    int i = 0;
+    while(i<n)
+    {
+        if (s[i] == 'W')
+        {
+            i++;
+            continue;
+        }
+        int cntR = 0, cntB = 0;
+        while (i < n && s[i] != 'W') 
+        {
+            if (s[i] == 'R') cntR++;
+            else cntB++;
+            i++;
+        }
+        
+        if (cntR == 0 || cntB == 0) 
+        {
+            cout << "NO" << endl;
+            return;
+        }
+    }
+    cout << "Yes" << endl;
+}
+void moink()
+{
+    ll n;
+    cin >> n;
+    vector<string> s(n);
+    for (int i = 0; i < n;i++)
+        cin >> s[i];
+
+    ll cnt[11][11] = {0};
+    for (int i = 0; i < n;i++)
+    {
+        cnt[s[i][0] - 'a'][s[i][1] - 'a']++;
+    }
+
+    ll ans = 0;
+    for (int i = 0; i < 11;i++)
+    {
+        for (int j = 0; j < 11;j++)
+        {
+            if(cnt[i][j]==0)
+            continue;
+
+            for (int ni = 0; ni < 11;ni++)
+            {
+                if(ni==i)
+                continue;
+                ans += cnt[i][j] * cnt[ni][j];
+            }
+            for (int nj = 0; nj < 11; nj++) 
+            {
+                if (nj == j) continue;
+                ans += cnt[i][j] * cnt[i][nj];
+            }
+        }
+    }
+    ans /= 2;
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    int l = 0, r = n - 1;
+    int sum_l = 0, sum_r = 0, ans = 0;
+    while(l<=r)
+    {
+        if(sum_l<sum_r)
+        {
+            sum_l += a[l++];
+        }
+        else if(sum_l>sum_r)
+        {
+            sum_r += a[r--];
+        }
+        else
+        {
+            ans = max(ans, l + (n - 1 - r));
+            if (l < r) 
+            {
+                sum_l += a[l++];
+            } 
+            else 
+            {
+                break;
+            }
+        }
+    }
+    if (sum_l == sum_r) 
+    {
+         ans = max(ans, l + (n - 1 - r));
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    ll n;
+    cin >> n;
+    if(n==1)
+    {
+        cout << 1 << endl;
+        return;
+    }
+    vector<ll> prime;
+    for (int i = 2; prime.size() < n - 1;i++)
+    {
+        bool isPrime = 1;
+        for (int j = 2; j * j <= i;++j)
+        {
+            if(i%j==0)
+            {
+                isPrime = 0;
+                break;
+            }
+        }
+        if(isPrime)
+        {
+            prime.push_back(i);
+        }
+    }
+
+    vector<ll> a(n);
+    a[0] = prime[0];
+    for (int i = 1; i < n - 1; i++)
+    {
+        a[i] = prime[i - 1] * prime[i];
+    }
+    a[n - 1] = prime[n - 2];
+    for(ll x : a)
+    {
+        cout << x << " ";
+    }
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    ll maxn = -1;
+    for (int i = 0; i < n;i++)
+    {
+        ll x;
+        cin >> x;
+        maxn = max(maxn, x);
+    }
+    cout << maxn * n << endl;
+}
+void moink()
+{
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    sort(a.begin(), a.end());
+    a.erase(unique(a.begin(), a.end()), a.end());
+
+    ll ans = 1, cur = 1;
+    for (size_t i = 1; i < a.size(); i++) 
+    {
+        if (a[i] == a[i - 1] + 1) 
+        {
+            cur++;
+        } 
+        else 
+        {
+            ans = max(ans, cur);
+            cur = 1;
+        }
+    }
+    ans = max(ans, cur);
+    cout << ans << endl;
+}  
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+    }
+
+    int l = 0, ans = 0;
+    unordered_map<int, int> cnt;
+    for (int r = 0; r < n;r++)
+    {
+        cnt[a[r]]++;
+        while(cnt[a[r]]>1)
+        {
+            cnt[a[l]]--;
+            l++;
+        }
+        ans = max(ans, r - l + 1);
+    }
+     cout << ans << endl;
+}
+const int maxn = 505;
+vector<int> adj[maxn];
+bool vis[maxn];
+
+void dfs(int u)
+{
+    vis[u] = 1;
+    for(int v:adj[u])
+    {
+        if(!vis[v])
+        {
+            dfs(v);
+        }
+    }
+}
+
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+
+    for(int i = 1; i <= n; i++) 
+    {
+        adj[i].clear();
+        vis[i] = false;
+    }
+
+    for (int i = 0; i < m;i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        adj[x].push_back(y);
+    }
+
+    dfs(1);
+
+    if(vis[n])
+        cout << "Yes" << endl;
+
+    else
+        cout << "No" << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+    }
+
+    int cnt_odd = 0, cnt_even = 0;
+    for (int i = 0; i < n;i++)
+    {
+        if (a[i] % 2 == 0)
+            cnt_even++;
+        else
+            cnt_odd++;
+    }
+    if (cnt_even == n || cnt_odd == n)
+    {
+        for(int x : a)
+        {
+            cout << x << " ";
+        }
+    }
+    else
+    {
+        sort(a.begin(), a.end());
+        for(int x : a)
+        {
+            cout << x << " ";
+        }
+    }
+}
+void moink()
+{
+    int n;
+    cin>>n;
+    vector<ll> odd,even;
+    for (int i = 0; i < n;i++)
+    {
+        int x;
+        cin >> x;
+        if(x%2==0)
+            even.push_back(x);
+        else
+            odd.push_back(x);
+    }
+    if(odd.empty())
+    {
+        cout << 0 << endl;
+        return;
+    }
+
+    ll ans = 0;
+    for(ll x : even)
+    {
+        ans += x;
+    }
+
+    sort(odd.begin(), odd.end(), greater<ll>());
+    int odd_half = (((int)odd.size() + 1) / 2);
+    for (int i = 0; i < odd_half;i++)
+    {
+        ans += odd[i];
+    }
+    cout << ans << endl;
+}
+const int MAX = 1e5 + 5;
+bool is_prime[MAX];
+vector<ll> prime;
+void init()
+{
+    fill(is_prime, is_prime + MAX, 1);
+    is_prime[0] = is_prime[1] = 0;
+    for (int i = 2; i < MAX;++i)
+    {
+        if(is_prime[i])
+        {
+            prime.push_back(i);
+            for (ll j = 1LL * i * i; j < MAX;j+=i)
+            {
+                is_prime[j] = 0;
+            }
+        }
+    }
+}
+
+void moink()
+{
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+    }
+
+    for (int i = 0; i < n;i++)
+    {
+        if(a[i]==1)
+        {
+            cout << 2 << endl;
+            return;
+        }
+    }
+
+    unordered_set<ll> factors;
+    for (int i = 0; i < n;i++)
+    {
+        ll x = a[i];
+        for (ll p : prime)
+        {
+            if (p *p > x)
+            {
+                break;
+            }
+            if (x % p == 0)
+            {
+                factors.insert(p);
+                while(x%p==0)
+                {
+                    x /= p;
+                }
+            }
+        }
+        if(x>1)
+            factors.insert(x);
+    }
+
+    for(ll p : prime)
+    {
+        if(factors.find(p)==factors.end())
+        {
+            cout << p << endl;
+            return;
+        }
+    }
+}
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+    int px = 0, py = 0;
+    int point = 0;
+    while(n--)
+    {
+        int x, y;
+        cin >> x >> y;
+        point += x - px;
+        if (((x - px + 2) % 2) != ((y - py + 2) % 2))
+        {
+            point--;
+        }
+        px = x, py = y;
+    }
+    if (px != m)
+    {
+        point += m - px;
+    }
+    cout << point << endl;
+}
+void moink()
+{
+    int n, m, l, r;
+    cin >> n >> m >> l >> r;
+    int new_l = max(l, -m);
+    int new_r = new_l + m;
+    cout << new_l << " " << new_r << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<vector<int>> grid(n, vector<int>(n));
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < n;j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    vector<int> ans(2 * n + 1);
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < n;j++)
+        {
+            ans[i + j + 2] = grid[i][j];
+        }
+    }
+
+    vector<bool> seen(2 * n + 1, 0);
+    for (int i = 2; i <= 2 * n;i++)
+    {
+        seen[ans[i]] = 1;
+    }
+
+    for (int x = 1; x <= 2 * n;x++)
+    {
+        if(!seen[x])
+        {
+            ans[1] = x;
+            break;
+        }
+    }
+
+    for (int i = 1; i <= 2 * n;i++)
+    {
+        cout << ans[i] << " ";
+    }
+}
+void moink()
+{
+    string p;
+    cin >> p;
+    string s;
+    cin >> s;
+    if (p.empty() || s.empty()) 
+    {
+        cout << "NO" << endl;
+        return;
+    }
+    int i = 0, j = 0;
+    while(i<p.size()&&j<s.size())
+    {
+        if(s[j]!=p[i])
+        {
+            cout << "NO" << endl;
+            return;
+        }
+        if (j + 1 < s.size() && s[j + 1] == p[i])
+        {
+            j += 2;
+        }
+        else
+        {
+            j++;
+        }
+        i++;
+    }
+    if(i==p.size()&&j==s.size())
+    {
+        cout << "YES" << endl;
+        return;
+    }
+    cout << "NO" << endl;
+}
+void moink()
+{
+    string s;
+    cin >> s;
+    int n = s.size();
+    bool ok = 0;
+    for (int i = 0; i < n - 1;i++)
+    {
+        if (s[i] == s[i + 1])
+        {
+            ok = 1;
+            break;
+        }
+    }
+    if(ok)
+        cout << 1 << endl;
+    else
+        cout << n << endl;
+}
+void moink() {
+    ll x, y, k;
+    cin >> x >> y >> k;
+
+    if (x == 0 &&y == 0)
+    {
+        cout << 0 << endl;
+        return;
+    }
+
+    ll l = 1, r = 2e9, ans = r;
+    while (l <= r) 
+    {
+        ll mid = (l + r) / 2;
+        ll odd = (mid + 1) / 2;
+        ll even = mid / 2;
+
+        if (odd * k >= x && even * k >= y) 
+        {
+            ans = mid;
+            r = mid - 1;
+        } 
+        else 
+        {
+            l = mid + 1;
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> b(n);
+    vector<int> cnt(n + 1, 0);
+    int mx = 0, ntx = 1;
+    for (int i = 0; i < n;i++)
+    {
+        int x;
+        cin >> x;
+        if (cnt[x] < mx || mx == 0)
+        {
+            b[i] = x;
+            cnt[x]++;
+            if(cnt[x]>mx)
+                mx = cnt[x];
+        }
+        else
+        {
+            while(cnt[ntx]>0)
+                ntx++;
+
+            b[i] = ntx;
+            cnt[ntx] = 1;
+            ntx++;
+        }
+    }
+    for(int x : b)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+}
+void moink()
+{
+    ll m, a, b, c;
+    cin >> m >> a >> b >> c;
+    ll ans = 0;
+    ll m1 = m;
+    ll m2 = m;
+    if (a <= m1)
+    {
+        m1 -= a;
+        ans += a;
+    }
+    else
+    {
+        ans += m1;
+        m1 = 0;
+    }
+
+    if (b <= m2)
+    {
+        m2 -= b;
+        ans += b;
+    }
+    else
+    {
+        ans += m2;
+        m2 = 0;
+    }
+
+    ans += min(c, m1 + m2);
+    cout << ans << endl;
+}
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    int b;
+    cin >> b;
+    int last = min(a[0], b - a[0]);
+    for (int i = 1; i < n;i++)
+    {
+        int x1 = a[i];
+        int x2 = b - a[i];
+
+        if (x1 < last &&x2 < last)
+        {
+            cout << "No" << endl;
+            return;
+        }
+
+        if (x1 >= last &&x2 >= last)
+        {
+            last = min(x1, x2);
+        }
+
+        else if (x1 >= last)
+        {
+            last = x1;
+        }
+
+        else
+        {
+            last = x2;
+        }
+    }
+    cout << "Yes" << endl;
+}
+vector<int> nums;
+void get(int cur,int limit)
+{
+    if(cur>limit)
+        return;
+
+    if (cur != 1)
+    {
+        nums.push_back(cur);
+    }
+    get(cur * 10, limit);
+    get(cur * 10 + 1, limit);
+}
+
+bool check(ll x)
+{
+    if(x==1)
+        return 1;
+
+    for (int d : nums)
+    {
+        if(d>x)
+        {
+            continue;
+        }
+        if (x % d == 0 &&check(x / d))
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void moink()
+{
+    ll n;
+    cin >> n;
+    cout << (check(n) ? "YES" : "NO") << endl;
+}
+void moink()
+{
+    string s;
+    cin >> s;
+    int h = stoi(s.substr(0, 2));
+    int m = stoi(s.substr(3, 2));
+
+    string period;
+    int hour12;
+
+    if (h == 0) 
+    {
+        hour12 = 12;
+        period = "AM";
+    } 
+    else if (h == 12) 
+    {
+        hour12 = 12;
+        period = "PM";
+    } 
+    else if (h < 12)
+    {
+        hour12 = h;
+        period = "AM";
+    } 
+    else 
+    {
+        hour12 = h - 12;
+        period = "PM";
+    }
+
+    cout << setw(2) << setfill('0') << hour12 << ":"
+         << setw(2) << setfill('0') << m << " "
+         << period << endl;
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    bool result_ok = 0;
+    for (int start = 0; start <= 1;start++)
+    {
+        vector<int> mp(26, -1);
+        bool ok = 1;
+        for (int i = 0; i < n;i++)
+        {
+            int need = (start + i) % 2;
+            int ch = s[i] - 'a';
+            if(mp[ch]==-1)
+            {
+                mp[ch] = need;
+            }
+            else if(mp[ch]!=need)
+            {
+                ok = 0;
+                break;
+            }
+        }
+        if(ok)
+        {
+            result_ok = 1;
+            break;
+        }
+    }
+    cout << (result_ok ? "YES" : "NO") << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    int size = 2 * n;
+    for (int i = 0; i < size;i++)
+    {
+        for (int j = 0; j < size;j++)
+        {
+            if (((i / 2) + (j / 2)) % 2 == 0)
+                cout << '#';
+            else
+                cout << '.';
+        }
+        cout << endl;
+    }
+}
+void moink()
+{
+    string s;
+    cin >> s;
+    int res = 1;
+    bool ex = 0;
+    int n = (int)s.size();
+    for (int i = 0; i + 1 < n;i++)
+    {
+        if (s[i] != s[i + 1])
+        {
+            res += (s[i] != s[i + 1]);
+            ex |= (s[i] == '0' && s[i + 1] == '1');
+        }
+    }
+    cout << res - ex << endl;
+}
+void moink()
+{
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    int bp = (b - a + 12) % 12;
+    int cp = (c - a + 12) % 12;
+    int dp = (d - a + 12) % 12;
+
+    if ((cp < bp) != (dp < bp))
+    {
+        cout << "Yes" << endl;
+    }
+    else
+        cout << "No" << endl;
+}
+void moink()
+{
+    ll n, m;
+    cin >> n >> m;
+    vector<vector<char>> grid(n + 1, vector<char>(m + 1));
+    for (int i = 1; i <= n;i++)
+    {
+        for (int j = 1; j <= m;j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    int min_r = n + 1, max_r = 0, min_c = m + 1, max_c = 0;
+    for (int i = 1; i <= n;i++)
+    {
+        for (int j = 1; j <= m;j++)
+        {
+            if(grid[i][j]=='#')
+            {
+                min_r = min(min_r, i);
+                max_r = max(max_r, i);
+                min_c = min(min_c, j);
+                max_c = max(max_c, j);
+            }
+        }
+    }
+    cout << (min_r + max_r) / 2 << " " << (min_c + max_c) / 2 << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    for (int i = 0; i < n;i++)
+        {
+            cin >> a[i];
+        }
+
+    ll cur = 0;
+    set<ll> seen;
+    int ans = 0;
+    for (int i = 0; i < n;i++)
+    {
+        cur += a[i];
+        seen.insert(a[i]);
+        if (cur % 2 == 0 &&seen.count(cur / 2))
+        {
+            ans++;
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    string s, t;
+    cin >> s >> t;
+    int n = s.size(), m = t.size();
+    int j = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (j < m &&(s[i] == t[j] || s[i] == '?'))
+        {
+            if (s[i] == '?')
+                {
+                    s[i] = t[j];
+                }
+
+                j++;
+        }
+
+        else if (s[i] == '?')
+        {
+            s[i] = 'a';
+        }
+        
+    }
+
+    if (j == m)
+    {
+        cout << "Yes" << endl;
+        cout << s << endl;
+    }
+    else
+    {
+        cout << "No" << endl;
+    }
+}
+void moink()
+{
+    ll n, m, h;
+    cin >> n >> m >> h;
+    vector<ll> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    vector<ll> val(n);
+    vector<int> last_ver(n, -1);
+    int ver = 0;
+    while(m--)
+    {
+        int pos;
+        ll c;
+        cin >> pos >> c;
+        pos--;
+
+        ll cur;
+        if (last_ver[pos] < ver)
+        {
+            cur = a[pos];
+        }
+        else
+        {
+            cur = val[pos];
+        }
+
+        ll new_val = cur + c;
+        if(new_val>h)
+        {
+            ver++;
+        }
+        else
+        {
+            last_ver[pos] = ver;
+            val[pos] = new_val;
+        }
+    }
+
+    for (int i = 0; i < n;i++)
+    {
+        if(last_ver[i]<ver)
+            cout << a[i];
+        else
+            cout << val[i] << endl;
+
+        if (i < n - 1)
+            cout << " ";
+    }
+    cout << endl;
+}
+bool check(int cur,int target)
+{
+    if(cur == target)
+        return 1;
+    if(cur < target)
+        return 0;
+    if (cur % 3 != 0)
+        return 0;
+
+    return check(cur / 3, target) || check(cur * 2 / 3, target);
+}
+
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+
+    if(check(n,m))
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+}
+void moink()
+{
+    ll n, q;
+    cin >> n >> q;
+    vector<ll> pre(n + 1, 0);
+    for (int i = 1; i <= n;i++)
+    {
+        ll x;
+        cin >> x;
+        pre[i] = (pre[i - 1] + x) % 2;
+    }
+
+    while(q--)
+    {
+        ll l, r, k;
+        cin >> l >> r >> k;
+        ll total = pre[n];
+
+        ll old_range = (pre[r] - pre[l - 1] + 2) % 2;
+
+        ll len = r - l + 1;
+        ll new_range = (k % 2) * (len % 2) % 2;
+        ll result = (total - old_range + new_range + 2) % 2;
+        
+        if(result==1)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
+    cout << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> part;
+
+    int base = 1;
+    while (n>0)
+    {
+        int dight = n % 10;
+        if(dight!=0)
+        {
+            part.push_back(dight * base);
+        }
+        n /= 10;
+        base *= 10;
+    }
+
+    cout << part.size() << endl;
+    for (auto x : part)
+    {
+        cout << x << " ";
+    }
+
+    cout << endl;
+}
+void moink()
+{
+    vector<string> grid(8);
+    for (int i = 0; i < 8;i++)
+    {
+        cin >> grid[i];
+    }
+
+    for (int i = 1; i < 7;i++)
+    {
+        for(int j = 0; j < 7;j++)
+        {
+            if (grid[i][j] == '#' &&grid[i + 1][j + 1] == '#' &&grid[i + 1][j - 1] == '#' &&grid[i - 1][j - 1] == '#' &&grid[i - 1][j + 1] == '#')
+            {
+                cout << i + 1 << " " << j + 1 << endl;
+                return;
+            }
+        }
+    }
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    set<int> seen;
+    for (int i = 0; i < n;i++)
+    {
+        int x;
+        cin >> x;
+        seen.insert(x);
+    }
+
+    if (((int)seen.size() % 2) == (n % 2))
+    {
+        cout << seen.size() << endl;
+    }
+    else
+    {
+        cout << seen.size() - 1 << endl;
+    }
+}
+void moink()
+{
+    vector<string> grid(8);
+    for (int i = 0; i < 8;i++)
+    {
+        cin >> grid[i];
+    }
+
+    for (int i = 0; i < 8;i++)
+    {
+        bool b = 1;
+        for (int j = 0; j < 8;j++)
+        {
+            if(grid[i][j]!='R')
+            {
+                b = 0;
+                break;
+            }
+        }
+        if(b)
+        {
+            cout << "R" << endl;
+            return;
+        }
+    }
+    cout << "B" << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int max1 = -1, max2 = -1, cnt = 0;
+    for (int i = 0; i < n;i++)
+    { 
+        cin >> a[i];
+        if(a[i]>max1)
+        {
+            max2 = max1;
+            max1 = a[i];
+            cnt = 1;
+        }
+        else if(a[i]==max1)
+        {
+            cnt++;
+        }
+        else if(a[i]>max2)
+        {
+            max2 = a[i];
+        }
+    }
+
+    for (int i = 0; i < n;i++)
+    {
+        if(a[i]==max1)
+        {
+            if(cnt>1)
+            {
+                cout << 0;
+            }
+            else
+            {
+                cout << a[i] - max2;
+            }
+        }
+        else
+        {
+            cout << a[i] - max1;
+        }
+
+        if (i < n - 1)
+        {
+            cout << " ";
+        }
+    }
+    cout << endl;
+}
+void moink()
+{
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    sort(a.begin(), a.end());
+
+    int len = 1;
+    int max_len = -1;
+    for (int i = 1; i < n;i++)
+    {
+        if (a[i] - a[i - 1] <= k)
+        {
+            len++;
+        }
+        else
+        {
+            max_len = max(max_len, len);
+            len = 1;
+        }
+    }
+    max_len = max(max_len, len);
+    cout << n - max_len << endl;
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+    vector<string> result;
+    int i = n - 1;
+    while (i>=0)
+    {
+        if(s[i]=='a'||s[i]=='e')
+        {
+            result.push_back(s.substr(i - 1, 2));
+            i -= 2;
+        }
+        else
+        {
+            result.push_back(s.substr(i - 2, 3));
+            i -= 3;
+        }
+    }
+    
+    reverse(result.begin(), result.end());
+    for (int i = 0; i < result.size();i++)
+    {
+        cout << result[i];
+        if (i < result.size() - 1)
+        {
+            cout << ".";
+        }
+    }
+    cout << endl;
+}
+void moink()
+{
+    string s;
+    cin >> s;
+    int n = s.size();
+
+    int pos0 = -1;
+    for (int i = 0; i < n;i++)
+    {
+        if(s[i]=='0')
+        {
+            pos0 = i;
+            break;
+        }
+    }
+
+    string temp;
+    for (int i = 0; i < n;++i)
+    {
+        if(i!=pos0)
+        {
+            temp.push_back(s[i]);
+        }
+    }
+
+    int pos1_in_temp = -1;
+    for (int i = 0; i < (int)temp.size();++i)
+    {
+        if(temp[i]=='1')
+        {
+            pos1_in_temp = i;
+            break;
+        }
+    }
+
+    int pos1 = -1;
+    int cnt = 0;
+    for (int i = 0; i < n;++i)
+    {
+        if(i==pos0)
+        continue;
+        if(cnt==pos1_in_temp)
+        {
+            pos1 = i;
+            break;
+        }
+        ++cnt;
+    }
+    void moink()
+{
+    int n, x;
+    cin >> n >> x;
+    vector<ll> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    auto check = [&](ll h)
+    {
+        ll water = 0;
+        for (int i = 0; i < n;i++)
+        {
+            if(a[i]<h)
+            {
+                water += h - a[i];
+                if(water>x)
+                    return false;
+            }
+        }
+        return (water <= x);
+    };
+
+    ll l = 1, r = 2e9;
+    while (l < r)
+    {
+        ll mid = (l + r + 1) / 2;
+        if(check(mid))
+        {
+            l = mid;
+        }
+        else
+            r = mid - 1;
+    }
+    cout << l << endl;
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    vector<int> pre_o(n + 1, 0);
+    for (int i = 0; i < n;i++)
+    {
+        pre_o[i + 1] = pre_o[i] + (s[i] == 'o');
+    }
+
+    vector<int> pos_x;
+    for (int i = 0; i < n;i++)
+    {
+        if(s[i]=='x')
+        {
+            pos_x.push_back(i);
+        }
+    }
+
+    for (int k = 1; k <= n;k++)
+    {
+        int e = pre_o[k];
+
+        int idx = lower_bound(pos_x.begin(), pos_x.end(), k) - pos_x.begin();
+        int remind_x = (int)pos_x.size() - idx;
+
+        if(e==0)
+            cout << k << endl;
+        else if (remind_x < e)
+            cout << n << endl;
+        else
+        {
+            int end_idx = pos_x[idx + e - 1];
+            cout << k + (end_idx - k + 1) << endl;
+        }
+    }
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    int ans = 0;
+    for (int i = 0; i < n;i++)
+    {
+        if(s[i]=='x')
+        {
+            bool left = (i == 0 || s[i - 1] == 'x');
+            bool right = (i == n - 1 || s[i + 1] == 'x');
+            if (left &&right)
+            {
+                ans++;
+            }
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    vector<int> pre(n), suf(n);
+    vector<int> cnt(26, 0);
+
+    int dist = 0;
+    for (int i = 0; i < n;i++)
+    {
+        int idx = s[i] - 'a';
+        if(cnt[idx]==0)
+        {
+            dist++;
+        }
+        cnt[idx]++;
+        pre[i] = dist;
+    }
+
+    dist = 0;
+    fill(cnt.begin(), cnt.end(), 0);
+    for (int i = n - 1; i >= 0;i--)
+    {
+        int idx = s[i] - 'a';
+        if(cnt[idx]==0)
+        {
+            dist++;
+        }
+        cnt[idx]++;
+        suf[i] = dist;
+    }
+
+    int ans = 0;
+    for (int i = 0; i + 1 < n;i++)
+    {
+        ans = max(ans, pre[i] + suf[i + 1]);
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+
+    int valley_cnt = 0;
+    for (int i = 0; i < n;)
+    {
+        int j = i;
+        while (j + 1 < n && a[j] == a[j + 1])
+        {
+            j++;
+        }
+
+        bool left = (i == 0) || (a[i - 1] > a[i]);
+        bool right = (j == n - 1) || (a[j] < a[j + 1]);
+
+        if (left &&right)
+        {
+            valley_cnt++;
+        }
+
+        i = j + 1;
+    }
+    if(valley_cnt==1)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+}
+int gcd(int a,int b)
+{
+    return b ? gcd(b, a % b) : a;
+}
+
+vector<int> coprime[1005];
+void init()
+{
+    for (int i = 1; i <= 1000; i++)
+    {
+        for (int j = 1; j <= 1000;j++)
+        {
+            if (gcd(i, j) == 1)
+            {
+                coprime[i].push_back(j);
+            }
+        }
+    }
+}
+
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> last_pos(1005, 0);
+
+    for (int i = 1; i <= n; i++)
+    {
+        int x;
+        cin >> x;
+        last_pos[x] = i;
+    }
+
+    int ans = -1;
+    for (int i = 1; i <= 1000;i++)
+    {
+        if (last_pos[i] == 0)
+        continue;
+
+        for(int k : coprime[i])
+        {
+            if(last_pos[k] != 0)
+            {
+                ans = max(ans, last_pos[i] + last_pos[k]);
+            }
+        }
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    vector<int> left_1(n, 0);
+    ll cnt_1 = 0, base = 0;
+    for (int i = 0; i < n;i++)
+    {
+        left_1[i] = cnt_1;
+        if(a[i]==1)
+        {
+            cnt_1++;
+        }
+        else
+        {
+            base += cnt_1;
+        }
+    }
+
+    vector<int> right_0(n, 0);
+    int cnt_0 = 0;
+    for (int i = n - 1; i >= 0;i--)
+    {
+        right_0[i] = cnt_0;
+        if(a[i]==0)
+            cnt_0++;
+    }
+
+    ll ans = base;
+    for (int i = 0; i < n;i++)
+    {
+        ll new_sc = base;
+        if(a[i]==1)
+        {
+            new_sc = base - right_0[i] + left_1[i];
+        }
+        else
+        {
+            new_sc = base + right_0[i] - left_1[i];
+        }
+        ans = max(ans, new_sc);
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    ll n, c;
+    cin >> n >> c;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+    }
+
+    ll l = 0, r = 2e9;
+    while(l<r)
+    {
+        ll mid = (l + r + 1) / 2;
+
+        ll sum = 0;
+        bool ok = 1;
+        for (int i = 0; i < n;i++)
+        {
+            ll need = a[i] + 2 * mid;
+            sum += need * need;
+            if(sum>c)
+            {
+                ok = 0;
+                break;
+            }
+        }
+        if(ok)
+            l = mid;
+        else
+            r = mid - 1;
+    }
+    cout << l << endl;
+}
+void moink()
+{
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> grid(n, vector<int>(m, 0));
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < m;j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    int dx[4] = {-1, 1, 0, 0};
+    int dy[4] = {0, 0, -1, 1};
+
+    ll ans = 0;
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < m;j++)
+        {
+            if (grid[i][j] != 0)
+            {
+                ll sum = 0;
+                queue<pair<int, int>> q;
+                q.push({i, j});
+                sum += grid[i][j];
+                grid[i][j] = 0;
+
+                while(!q.empty())
+                {
+                    pair<int, int> cur = q.front();
+                    q.pop();
+                    int x = cur.first;
+                    int y = cur.second;
+
+                    for (int d = 0; d < 4;d++)
+                    {
+                        int n_x = x + dx[d];
+                        int n_y = y + dy[d];
+
+                        if(n_x < 0 || n_x >= n || n_y < 0 || n_y >= m)
+                        {
+                            continue;
+                        }
+                        if(grid[n_x][n_y] == 0)
+                        {
+                            continue;
+                        }
+
+                        sum += grid[n_x][n_y];
+                        grid[n_x][n_y] = 0;
+                        q.push({n_x,n_y});
+                    }
+                }
+                ans = max(ans, sum);
+            }
+        }
+    }
+    cout << ans << endl;
+}
+bool check(int h,int m)
+{
+    int new_m = (m % 10) * 10 + (m / 10);
+    return new_m == h;
+}
+
+void moink()
+{
+    string s;
+    int x;
+    cin >> s >> x;
+
+    int hh = stoi(s.substr(0, 2));
+    int mm = stoi(s.substr(3, 2));
+
+    int ans = 0;
+    int cur_min = hh * 60 + mm;
+    int start_min = cur_min;
+
+    if(check(hh,mm))
+        ans++;
+
+    cur_min = (cur_min + x) % 1440;
+
+    while(start_min != cur_min)
+    {
+        int cur_h = (cur_min / 60) % 24;
+        int cur_m = cur_min % 60;
+        if(check(cur_h, cur_m))
+        {
+            ans++;
+        }
+        cur_min = (cur_min + x) % 1440;
+    }
+    cout << ans << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<string> s(n);
+    unordered_set<string> str;
+
+    for (int i = 0; i < n;i++)
+    {
+        cin >> s[i];
+        string temp = s[i];
+        str.insert(temp);
+    }
+
+    for (int i = 0; i < n;i++)
+    {
+        bool ok = 0;
+        int len = s[i].size();
+
+        for (int j = 1; j < len;j++)
+        {
+            string l = s[i].substr(0, j);
+            string r = s[i].substr(j, len - j);
+
+            if(str.count(l)&&str.count(r))
+            {
+                ok = 1;
+            }
+        }
+        if(ok)
+            cout << 1;
+        else
+            cout << 0;
+    }
+    cout << endl;
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    vector<ll> get;
+    ll cur = 0;
+    for (int i = 0; i < n;i++)
+    {
+        ll left = i;
+        ll right = n - 1 - i;
+        if(s[i]=='L')
+        {
+            cur += left;
+            get.push_back(right - left);
+        }
+        else
+        {    
+            cur += right;
+            get.push_back(left - right);
+        }
+    }
+
+    sort(get.rbegin(), get.rend());
+    for (int k = 1; k <= n;k++)
+    {
+        if(k-1<get.size()&&get[k-1]>0)
+        {
+            cur += get[k - 1];
+        }
+        cout << cur << " ";
+    }
+    cout << endl;
+}
+const int maxn = 10005;
+bool is_prime[maxn];
+vector<int> primes;
+
+void init()
+{
+    fill(is_prime, is_prime + maxn, 1);
+    is_prime[0] = is_prime[1] = 0;
+
+    for (int i = 2; i * i < maxn;i++)
+    {
+        if(is_prime[i])
+        {
+            for (int j = i * i; j < maxn;j+=i)
+            {
+                is_prime[j] = 0;
+            }
+        }
+    }
+}
+
+void moink()
+{
+    int N;
+    cin >> N;
+    
+    for (int x = 4; x <= N;x+=2)
+    {
+        for (int p = 2; p <= x / 2; p++)
+        {
+            if (is_prime[p] &&is_prime[x - p])
+            {
+                cout << x << "=" << p << "+" << x - p << endl;
+                break;
+            }
+        }
+    }
+}
+bool isPrime(int n) 
+{
+    if (n < 2) return false;
+    for (int i = 2; i * i <= n; i++)
+        if (n % i == 0) return false;
+    return true;
+}
+
+void moink()
+{
+    int l, r;
+    cin >> l >> r;
+    if (l <= 2 && 2 <= r) cout << 2 << endl;
+    if (l <= 3 && 3 <= r) cout << 3 << endl;
+    if (l <= 5 && 5 <= r) cout << 5 << endl;
+    if (l <= 7 && 7 <= r) cout << 7 << endl;
+    if (l <= 11 && 11 <= r) cout << 11 << endl;
+
+     for (int len = 3; len <= 7; len += 2) 
+    {
+        int half_len = (len + 1) / 2;          
+        int start = pow(10, half_len - 1);     
+        int end = pow(10, half_len) - 1;       
+
+        for (int half = start; half <= end; half++)
+        {
+            
+            if ((half / (int)pow(10, half_len - 1)) % 2 == 0) continue;
+
+            
+            string s = to_string(half);
+            string rev = s;
+            reverse(rev.begin(), rev.end());
+
+            long long pal;
+            if (len % 2 == 0) 
+                pal = stoll(s + rev);
+            else
+                pal = stoll(s + rev.substr(1)); 
+
+            if (pal >= l && pal <= r && isPrime((int)pal))
+            {
+                cout << pal << endl;
+            }
+        }
+    }
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    int cnt = 0;
+    for (int i = 0; i + 1 < s.size();i++)
+    {
+        if(s[i] != s[i+1])
+            cnt++;
+    }
+    cout << (cnt == 1 ? 2 : 1) << '\n';
+}
+void moink()
+{
+    ll n;
+    cin >> n;
+    vector<ll> a(n), b(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+    for (int i = 0; i < n;i++)
+        cin >> b[i];
+
+    ll ex = 0;
+    for (int i = n - 1; i >= 0;i--)
+    {
+        ll cur = a[i] + ex;
+        if(i==0)
+        {
+            if(cur>b[i])
+            {
+                cout << "NO\n";
+                return;
+            }
+        }
+        else
+        {
+            if(cur>b[i])
+            {
+                ex = cur - b[i];
+            }
+            else
+            {
+                ex = 0;
+            }
+        }
+    }
+    cout << "YES" << endl;
+}
+bool check(ll n)
+{
+    string s = to_string(n);
+    set<char> st(s.begin(), s.end());
+    return st.size() <= 2;
+}
+
+const int L = 10;
+bool dfs(string s,int d,ll x)
+{
+    if(!s.empty())
+    {
+        ll y = stoll(s);
+        if (y >= 2 &&y <= 1000000000 &&check(x * y))
+        {
+            cout << y << endl;
+            return 1;
+        }
+
+        if (s.size() == L)
+            return 0;
+    }
+
+    for (int i = 0; i <= 9;i++)
+    {
+        char c = '0' + i;
+        if (s.empty() && i == 0)
+        continue;
+
+        int new_d = d;
+        if(s.find(c)==string::npos)
+            new_d++;
+
+        if (new_d <= 2)
+        {
+            if(dfs(s + c, new_d, x)) 
+            return 1;
+        }
+    }
+    return 0;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i]=='(')
+            ans++;
+        else
+            ans--;
+    }
+    if(ans==0)
+    {
+        cout << "YES" << endl;
+    }
+    else
+        cout << "NO" << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+    }
+
+    vector<int> tail;
+    for (int x : a)
+    {
+        auto it = upper_bound(tail.begin(), tail.end(), x);
+        if(it == tail.end())
+        {
+            tail.push_back(x);
+        }
+        else
+        {
+            *it = x;
+        }
+    }
+    int lnds_len = tail.size();
+    cout << n - lnds_len << endl;
+}
+void moink()
+{
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    vector<ll> six, two, three, other;
+    for (int i = 0; i < n;i++)
+    {
+        cin >> a[i];
+        if (a[i] % 6 == 0)
+        {
+            six.push_back(a[i]);
+        }
+        else if (a[i] % 2 == 0 &&a[i] % 3 != 0)
+        {
+            two.push_back(a[i]);
+        }
+        else if(a[i] % 2 != 0 &&a[i] % 3 == 0)
+        {
+            three.push_back(a[i]);
+        }
+        else
+        {
+            other.push_back(a[i]);
+        }
+    }
+    for (int x : six) cout << x << ' ';
+    for (int x : two) cout << x << ' ';
+    for (int x : other) cout << x << ' ';
+    for (int x : three) cout << x << ' ';
+}
+void moink()
+{
+    ll n, l, r;
+    cin >> n >> l >> r;
+    vector<ll> a(n);
+    for (int i = 0; i < n;i++)
+        cin >> a[i];
+
+    sort(a.begin(), a.end());
+    ll ans = 0;
+    for (int i = 0; i < n;i++)
+    {
+        int left = lower_bound(a.begin() + 1 + i, a.end(), l - a[i]) - a.begin();
+        int right = upper_bound(a.begin() + 1 + i, a.end(), r - a[i]) - a.begin();
+        if(right > left)
+            ans += right - left;
+    }
+    cout << ans << '\n';
 }
