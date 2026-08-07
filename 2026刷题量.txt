@@ -13792,3 +13792,127 @@ void moink()
     }
     cout << ans << '\n';
 }
+void moink()
+{
+    int n, q;
+    cin >> n >> q;
+    vector<ll> a(n + 1);
+    vector<ll> pref(n + 1, 0);
+    for (int i = 1; i <= n;i++)
+    {
+        cin >> a[i];
+        pref[i] = pref[i - 1] + a[i];
+    }
+
+    vector<ll> mx;
+    ll val_max = a[1];
+    for (int i = 1; i <= n;i++)
+    {
+        ll cur = a[i];
+        val_max = max(cur, val_max);
+        mx.push_back(val_max);
+    }
+
+    while(q--)
+    {
+        ll k;
+        cin >> k;
+        int ans_idx = upper_bound(mx.begin(), mx.end(), k) - mx.begin();
+        ll ans = pref[ans_idx];
+        cout << ans << ' ';
+    }
+    cout << '\n';
+}
+void moink()
+{
+    int n;
+    string s;
+    cin >> n >> s;
+
+    int cnt1 = 0, cnt0 = 0;
+    for (int i = 0; i < n;i++)
+    {
+        if(s[i]=='1')
+            cnt1++;
+        else
+            cnt0++;
+    }
+
+    if(abs(cnt1-cnt0)>2)
+    {
+        cout << -1 << '\n';
+        return;
+    }
+
+    int ans = n;
+    for (int start = 0; start <= 1;start++)
+    {
+        vector<int> match;
+        int need = start;
+        for(char c : s)
+        {
+            if (c - '0' == need)
+            {
+                match.push_back(need);
+                need = 1 - need;
+            }
+        }
+
+        int total = match.size();
+        int keep0 = count(match.begin(), match.end(), 0);
+        int keep1 = total - keep0;
+
+        while(total>0)
+        {
+            if (abs((cnt0 - keep0) - (cnt1 - keep1)) <= 1)
+            {
+                ans = min(ans, n - total);
+            }
+
+            int last = match.back();
+            if(last==0)
+                keep0--;
+            else
+                keep1--;
+            match.pop_back();
+            total--;
+        }
+    }
+    cout << ans << '\n';
+}
+void moink()
+{
+    ll x, q;
+    cin >> x >> q;
+    priority_queue<ll> left;
+    priority_queue<ll, vector<ll>, greater<ll>> right;
+
+    left.push(x);
+    while (q--)
+    {
+        ll a, b;
+        cin >> a >> b;
+        if(a <= left.top())
+            left.push(a);
+        else
+            right.push(a);
+
+        if(b <= left.top())
+            left.push(b);
+        else
+            right.push(b);
+
+        if (left.size() < right.size() + 1) 
+        {
+            left.push(right.top());
+            right.pop();
+        }
+        if (left.size() > right.size() + 1) 
+        {
+            right.push(left.top());
+            left.pop();
+        }
+        cout << left.top() << '\n';
+    }
+    
+}
